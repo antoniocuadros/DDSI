@@ -276,3 +276,6 @@ __pycache__/
 *.ide
 *.ide-shm
 *.ide-wal
+*.ide
+*.ide-shm
+*.ide-wal
