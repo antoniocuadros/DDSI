@@ -271,11 +271,14 @@ __pycache__/
 # Cake - Uncomment if you are using it
 # tools/
 
-# Visual Studio 2015
-.vs/
-*.ide
+# End of https://www.gitignore.io/api/aspnetcore
 *.ide-shm
-*.ide-wal
 *.ide
-*.ide-shm
-*.ide-wal
+TiendaVideojuegos/.vs/TiendaVideojuegos/DesignTimeBuild/.dtbcache
+TiendaVideojuegos/.vs/TiendaVideojuegos/v16/.suo
+*.ide
+*.ide
+*.cache
+TiendaVideojuegos/.vs/TiendaVideojuegos/DesignTimeBuild/.dtbcache
+TiendaVideojuegos/.vs/TiendaVideojuegos/v16/.suo
+*.ide
