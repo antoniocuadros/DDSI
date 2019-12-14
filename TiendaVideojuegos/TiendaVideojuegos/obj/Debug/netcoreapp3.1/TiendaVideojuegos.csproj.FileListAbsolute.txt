@@ -458,3 +458,4 @@ C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Deb
 C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\TiendaVideojuegos.dll
 C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\TiendaVideojuegos.pdb
 C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
+C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
