@@ -282,3 +282,5 @@ TiendaVideojuegos/.vs/TiendaVideojuegos/v16/.suo
 TiendaVideojuegos/.vs/TiendaVideojuegos/DesignTimeBuild/.dtbcache
 TiendaVideojuegos/.vs/TiendaVideojuegos/v16/.suo
 *.ide
+*.ide-wal
+*.ide-shm
