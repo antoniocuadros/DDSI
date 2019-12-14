@@ -14,5 +14,6 @@ namespace TiendaVideojuegos.Models
         public string Contraseña { get; set; }
         public string Telefono { get; set; }
         public string e_mail { get; set; }
+        public bool Logueado { get; set; }
     }
 }

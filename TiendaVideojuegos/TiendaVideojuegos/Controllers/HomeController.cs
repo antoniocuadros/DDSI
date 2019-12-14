@@ -5,21 +5,37 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TiendaVideojuegos.Data;
 using TiendaVideojuegos.Models;
+using TiendaVideojuegos.ViewModels;
 
 namespace TiendaVideojuegos.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly AbonadosContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, AbonadosContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        [HttpGet("{DNI?}")]
+        public IActionResult Index([FromRoute] string DNI)
         {
+            if (!string.IsNullOrEmpty(DNI))
+            {
+                var usuario = _context.Abonados.FirstOrDefault(p => p.DNI == DNI);
+                var homeViewModel = new HomeViewModel()
+                {
+                    abonado = usuario
+                };
+
+                return View(homeViewModel);
+            }
+
             return View();
         }
 
