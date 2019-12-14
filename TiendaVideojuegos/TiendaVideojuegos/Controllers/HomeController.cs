@@ -22,15 +22,15 @@ namespace TiendaVideojuegos.Controllers
             _context = context;
         }
 
-        [HttpGet("{DNI?}")]
-        public IActionResult Index([FromRoute] string DNI)
+        [HttpGet]
+        public IActionResult Index()
         {
-            if (!string.IsNullOrEmpty(DNI))
+
+            if (Services.UsuarioLogueado.Usuario != null)
             {
-                var usuario = _context.Abonados.FirstOrDefault(p => p.DNI == DNI);
                 var homeViewModel = new HomeViewModel()
                 {
-                    abonado = usuario
+                    abonado = Services.UsuarioLogueado.Usuario
                 };
 
                 return View(homeViewModel);

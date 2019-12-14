@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TiendaVideojuegos.Data;
@@ -40,6 +43,8 @@ namespace TiendaVideojuegos.Controllers
             _context.Entry(originalEntity).CurrentValues.SetValues(usuario);
 
             await _context.SaveChangesAsync();
+
+            Services.UsuarioLogueado.Usuario = usuario;
 
             return RedirectToAction("Index", "Home", new { area = "" });
         }
