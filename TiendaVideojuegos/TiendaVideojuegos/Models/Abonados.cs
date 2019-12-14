@@ -8,7 +8,7 @@ namespace TiendaVideojuegos.Models
 {
     public class Abonados
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string Nombre { get; set; }
         public string DNI { get; set; }
         public string Contraseña { get; set; }
