@@ -105,7 +105,6 @@ C:\Users\antcu\Dropbox\Proyecto_ASP\TiendaVideojuegos\TiendaVideojuegos\bin\Debu
 C:\Users\antcu\Dropbox\Proyecto_ASP\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\TiendaVideojuegos.Views.pdb
 C:\Users\antcu\Dropbox\Proyecto_ASP\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\TiendaVideojuegos.dll
 C:\Users\antcu\Dropbox\Proyecto_ASP\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\TiendaVideojuegos.pdb
-C:\Users\antcu\Dropbox\Proyecto_ASP\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Home\Register.cshtml.g.cs
 C:\Users\antcu\Dropbox\Proyecto_ASP\TiendaVideojuegos\TiendaVideojuegos\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\antcu\Dropbox\Proyecto_ASP\TiendaVideojuegos\TiendaVideojuegos\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
 C:\Users\antcu\Dropbox\Proyecto_ASP\TiendaVideojuegos\TiendaVideojuegos\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll

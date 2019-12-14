@@ -4,11 +4,17 @@
     ViewData["Title"] = "Create";
 }
 
+
+
 <h1>Register</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+
+            var tmp_id = Guid.NewGuid(); // this will be just temp data, to avoid problems with ModelState
+            <input type="hidden" asp-for="@Model.product.Id" value="@tmp_id" />
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
