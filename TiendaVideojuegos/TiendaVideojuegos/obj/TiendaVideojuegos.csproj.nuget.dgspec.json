@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\antcu\\Dropbox\\Proyecto_ASP\\TiendaVideojuegos\\TiendaVideojuegos\\TiendaVideojuegos.csproj": {}
+    "C:\\Users\\antcu\\Desktop\\implementacion\\DDSI\\TiendaVideojuegos\\TiendaVideojuegos\\TiendaVideojuegos.csproj": {}
   },
   "projects": {
-    "C:\\Users\\antcu\\Dropbox\\Proyecto_ASP\\TiendaVideojuegos\\TiendaVideojuegos\\TiendaVideojuegos.csproj": {
+    "C:\\Users\\antcu\\Desktop\\implementacion\\DDSI\\TiendaVideojuegos\\TiendaVideojuegos\\TiendaVideojuegos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\antcu\\Dropbox\\Proyecto_ASP\\TiendaVideojuegos\\TiendaVideojuegos\\TiendaVideojuegos.csproj",
+        "projectUniqueName": "C:\\Users\\antcu\\Desktop\\implementacion\\DDSI\\TiendaVideojuegos\\TiendaVideojuegos\\TiendaVideojuegos.csproj",
         "projectName": "TiendaVideojuegos",
-        "projectPath": "C:\\Users\\antcu\\Dropbox\\Proyecto_ASP\\TiendaVideojuegos\\TiendaVideojuegos\\TiendaVideojuegos.csproj",
+        "projectPath": "C:\\Users\\antcu\\Desktop\\implementacion\\DDSI\\TiendaVideojuegos\\TiendaVideojuegos\\TiendaVideojuegos.csproj",
         "packagesPath": "C:\\Users\\antcu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\antcu\\Dropbox\\Proyecto_ASP\\TiendaVideojuegos\\TiendaVideojuegos\\obj\\",
+        "outputPath": "C:\\Users\\antcu\\Desktop\\implementacion\\DDSI\\TiendaVideojuegos\\TiendaVideojuegos\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

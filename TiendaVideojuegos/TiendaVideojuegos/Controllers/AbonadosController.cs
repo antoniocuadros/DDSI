@@ -26,7 +26,7 @@ namespace TiendaVideojuegos.Controllers
         }
 
         // GET: Abonados/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
@@ -58,6 +58,7 @@ namespace TiendaVideojuegos.Controllers
         {
             if (ModelState.IsValid)
             {
+                abonados.Id = Guid.NewGuid();
                 _context.Add(abonados);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -66,7 +67,7 @@ namespace TiendaVideojuegos.Controllers
         }
 
         // GET: Abonados/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
@@ -86,7 +87,7 @@ namespace TiendaVideojuegos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Nombre,DNI,Contraseña,Telefono,e_mail")] Abonados abonados)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Nombre,DNI,Contraseña,Telefono,e_mail")] Abonados abonados)
         {
             if (id != abonados.Id)
             {
@@ -117,7 +118,7 @@ namespace TiendaVideojuegos.Controllers
         }
 
         // GET: Abonados/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
@@ -137,7 +138,7 @@ namespace TiendaVideojuegos.Controllers
         // POST: Abonados/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var abonados = await _context.Abonados.FindAsync(id);
             _context.Abonados.Remove(abonados);
@@ -145,7 +146,7 @@ namespace TiendaVideojuegos.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AbonadosExists(string id)
+        private bool AbonadosExists(Guid id)
         {
             return _context.Abonados.Any(e => e.Id == id);
         }
