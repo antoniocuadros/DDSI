@@ -54,11 +54,12 @@ namespace TiendaVideojuegos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,DNI,Contraseña,Telefono,e_mail")] Abonados abonados)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,DNI,Contraseña,Telefono,e_mail,Logueado")] Abonados abonados)
         {
             if (ModelState.IsValid)
             {
                 abonados.Id = Guid.NewGuid();
+                abonados.Logueado = false;
                 _context.Add(abonados);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

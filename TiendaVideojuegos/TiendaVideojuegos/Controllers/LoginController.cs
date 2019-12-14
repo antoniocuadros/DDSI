@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TiendaVideojuegos.Data;
+using TiendaVideojuegos.Models;
 using TiendaVideojuegos.ViewModels;
 
 namespace TiendaVideojuegos.Controllers
@@ -18,7 +19,8 @@ namespace TiendaVideojuegos.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct(LoginViewModel loginViewModel)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LoginUser([Bind("DNI,Contraseña")] Abonados loginViewModel)
         {
             var usuario = _context.Abonados.FirstOrDefault(p => p.DNI == loginViewModel.DNI);
 
@@ -27,7 +29,7 @@ namespace TiendaVideojuegos.Controllers
                 return NotFound();
             }
             
-            if(usuario.Contraseña != loginViewModel.contraseña)
+            if(usuario.Contraseña != loginViewModel.Contraseña)
             {
                 return NotFound();
             }
@@ -42,6 +44,7 @@ namespace TiendaVideojuegos.Controllers
             return RedirectToAction("Index", "Home", new { area = "" });
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
