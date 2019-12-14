@@ -303,3 +303,4 @@ C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\o
 C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Abonados\Details.cshtml.g.cs
 C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Abonados\Edit.cshtml.g.cs
 C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Abonados\Index.cshtml.g.cs
+C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\TiendaVideojuegos.csprojAssemblyReference.cache

@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TiendaVideojuegos.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class guid : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,7 +11,7 @@ namespace TiendaVideojuegos.Migrations
                 name: "Abonados",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
                     Nombre = table.Column<string>(nullable: true),
                     DNI = table.Column<string>(nullable: true),
                     Contraseña = table.Column<string>(nullable: true),
