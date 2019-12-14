@@ -274,3 +274,6 @@ __pycache__/
 # End of https://www.gitignore.io/api/aspnetcore
 *.ide-shm
 *.ide
+TiendaVideojuegos/.vs/TiendaVideojuegos/DesignTimeBuild/.dtbcache
+TiendaVideojuegos/.vs/TiendaVideojuegos/v16/.suo
+*.ide
