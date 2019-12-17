@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lionheart\\source\\repos\\DDSI\\TiendaVideojuegos\\TiendaVideojuegos\\TiendaVideojuegos.csproj": {}
+    "C:\\Users\\antcu\\Desktop\\DDSI\\DDSI\\TiendaVideojuegos\\TiendaVideojuegos\\TiendaVideojuegos.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lionheart\\source\\repos\\DDSI\\TiendaVideojuegos\\TiendaVideojuegos\\TiendaVideojuegos.csproj": {
+    "C:\\Users\\antcu\\Desktop\\DDSI\\DDSI\\TiendaVideojuegos\\TiendaVideojuegos\\TiendaVideojuegos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lionheart\\source\\repos\\DDSI\\TiendaVideojuegos\\TiendaVideojuegos\\TiendaVideojuegos.csproj",
+        "projectUniqueName": "C:\\Users\\antcu\\Desktop\\DDSI\\DDSI\\TiendaVideojuegos\\TiendaVideojuegos\\TiendaVideojuegos.csproj",
         "projectName": "TiendaVideojuegos",
-        "projectPath": "C:\\Users\\Lionheart\\source\\repos\\DDSI\\TiendaVideojuegos\\TiendaVideojuegos\\TiendaVideojuegos.csproj",
-        "packagesPath": "C:\\Users\\Lionheart\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lionheart\\source\\repos\\DDSI\\TiendaVideojuegos\\TiendaVideojuegos\\obj\\",
+        "projectPath": "C:\\Users\\antcu\\Desktop\\DDSI\\DDSI\\TiendaVideojuegos\\TiendaVideojuegos\\TiendaVideojuegos.csproj",
+        "packagesPath": "C:\\Users\\antcu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\antcu\\Desktop\\DDSI\\DDSI\\TiendaVideojuegos\\TiendaVideojuegos\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Lionheart\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\antcu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

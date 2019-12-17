@@ -48,6 +48,21 @@ namespace TiendaVideojuegos.Controllers
 
             return RedirectToAction("Index", "Home", new { area = "" });
         }
+        public async Task<IActionResult> LogoutUser()
+        {
+            var usuario = Services.UsuarioLogueado.Usuario;
+
+            usuario.Logueado = false;
+
+            var originalEntity = _context.Abonados.Find(usuario.Id);
+            _context.Entry(originalEntity).CurrentValues.SetValues(usuario);
+
+            await _context.SaveChangesAsync();
+
+            Services.UsuarioLogueado.Usuario = null;
+
+            return RedirectToAction("Index", "Home", new { area = "" });
+        }
 
         [HttpGet]
         public IActionResult Index()
