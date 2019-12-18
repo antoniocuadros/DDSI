@@ -10,5 +10,7 @@ namespace TiendaVideojuegos.Models
         public Guid IdUnidad { get; set; }
         public string Estado { get; set; }
         public Guid IdAbonado { get; set; }
+        public Articulos Articulo { get; set; }
+        public Abonados Abonado { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace TiendaVideojuegos.Controllers
 
             usuario.Logueado = true;
 
-            var originalEntity = _context.Abonados.Find(usuario.Id);
+            var originalEntity = _context.Abonados.Find(usuario.IdAbonado);
             _context.Entry(originalEntity).CurrentValues.SetValues(usuario);
 
             await _context.SaveChangesAsync();
@@ -54,7 +54,7 @@ namespace TiendaVideojuegos.Controllers
 
             usuario.Logueado = false;
 
-            var originalEntity = _context.Abonados.Find(usuario.Id);
+            var originalEntity = _context.Abonados.Find(usuario.IdAbonado);
             _context.Entry(originalEntity).CurrentValues.SetValues(usuario);
 
             await _context.SaveChangesAsync();

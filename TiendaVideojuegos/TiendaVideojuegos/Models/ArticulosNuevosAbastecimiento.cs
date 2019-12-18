@@ -10,5 +10,7 @@ namespace TiendaVideojuegos.Models
         public Guid IdUnidad { get; set; }
         public Guid IdAbastecimiento { get; set; }
         public Guid IdProveedor { get; set; }
+        public Articulos Articulo { get; set; }
+        public Proveedores Proveedor { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace TiendaVideojuegos.Controllers
             }
 
             var abonados = await _context.Abonados
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.IdAbonado == id);
             if (abonados == null)
             {
                 return NotFound();
@@ -54,11 +54,11 @@ namespace TiendaVideojuegos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,DNI,Contraseña,Telefono,e_mail,Logueado")] Abonados abonados)
+        public async Task<IActionResult> Create([Bind("IdAbonado,Nombre,DNI,Contraseña,Telefono,e_mail,Logueado,Direccion")] Abonados abonados)
         {
             if (ModelState.IsValid)
             {
-                abonados.Id = Guid.NewGuid();
+                abonados.IdAbonado = Guid.NewGuid();
                 abonados.Logueado = false;
                 _context.Add(abonados);
                 await _context.SaveChangesAsync();
@@ -88,9 +88,9 @@ namespace TiendaVideojuegos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Nombre,DNI,Contraseña,Telefono,e_mail")] Abonados abonados)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdAbonado,Nombre,DNI,Contraseña,Telefono,e_mail,Direccion")] Abonados abonados)
         {
-            if (id != abonados.Id)
+            if (id != abonados.IdAbonado)
             {
                 return NotFound();
             }
@@ -104,7 +104,7 @@ namespace TiendaVideojuegos.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AbonadosExists(abonados.Id))
+                    if (!AbonadosExists(abonados.IdAbonado))
                     {
                         return NotFound();
                     }
@@ -127,7 +127,7 @@ namespace TiendaVideojuegos.Controllers
             }
 
             var abonados = await _context.Abonados
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.IdAbonado == id);
             if (abonados == null)
             {
                 return NotFound();
@@ -149,7 +149,7 @@ namespace TiendaVideojuegos.Controllers
 
         private bool AbonadosExists(Guid id)
         {
-            return _context.Abonados.Any(e => e.Id == id);
+            return _context.Abonados.Any(e => e.IdAbonado == id);
         }
     }
 }
