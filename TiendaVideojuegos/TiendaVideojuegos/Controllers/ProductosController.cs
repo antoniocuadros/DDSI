@@ -181,8 +181,8 @@ namespace TiendaVideojuegos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ComprarArticulosAProveedor([Bind("IdProducto,IdProveedor,Cantidad")] ComprarArticulosViewModel compra)
         {
-            Productos producto = _context.Productos.FirstOrDefault(p => p.IdProducto == compra.IdProducto);
-            Proveedores proveedor = _context.Proveedores.FirstOrDefault(p => p.IdProveedor == compra.IdProveedor);
+            Productos producto = _context.Productos.Include(b => b.Articulos).FirstOrDefault(p => p.IdProducto == compra.IdProducto);
+            Proveedores proveedor = _context.Proveedores.Include(b => b.ArticulosNuevosAbastecimiento).FirstOrDefault(p => p.IdProveedor == compra.IdProveedor);
 
             if (producto != null && proveedor != null)
             {
@@ -216,11 +216,11 @@ namespace TiendaVideojuegos.Controllers
 
                 await _context.Articulos.AddAsync(articulo);
                 await _context.ArticulosNuevosAbastecimientos.AddAsync(articulosNuevosAbastecimiento);
-                //PUEDE QUE HAGA FALTA AÑADIRLO A LISTA DE PRODUCTOS
-                producto.Articulos.Add(articulo);
+
+                //actualizamos el valor del producto con el producto nuevo
                 _context.Update(producto);
+
                 await _context.SaveChangesAsync();
-                
 
                 return RedirectToAction(nameof(Index));
             }
