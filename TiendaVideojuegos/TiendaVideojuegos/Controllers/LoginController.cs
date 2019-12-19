@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TiendaVideojuegos.Data;
 using TiendaVideojuegos.Models;
 using TiendaVideojuegos.ViewModels;
@@ -25,8 +26,8 @@ namespace TiendaVideojuegos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LoginUser([Bind("DNI,Contraseña")] Abonados loginViewModel)
         {
-            var usuario = _context.Abonados.FirstOrDefault(p => p.DNI == loginViewModel.DNI);
-
+            var usuario = _context.Abonados.Include(b => b.Ventas).Include(b => b.ArticulosSegundaManoReventa).FirstOrDefault(p => p.DNI == loginViewModel.DNI);
+            
             if (usuario == null)
             {
                 return NotFound();

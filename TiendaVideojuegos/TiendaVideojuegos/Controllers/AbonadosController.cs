@@ -23,7 +23,7 @@ namespace TiendaVideojuegos.Controllers
         // GET: Abonados
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Abonados.ToListAsync());
+            return View(await _context.Abonados.Include(b => b.ArticulosSegundaManoReventa).Include(b => b.Ventas).ToListAsync());
         }
 
         // GET: Abonados/Details/5
@@ -34,7 +34,7 @@ namespace TiendaVideojuegos.Controllers
                 return NotFound();
             }
 
-            var abonados = await _context.Abonados
+            var abonados = await _context.Abonados.Include(b => b.ArticulosSegundaManoReventa).Include(b => b.Ventas)
                 .FirstOrDefaultAsync(m => m.IdAbonado == id);
             if (abonados == null)
             {
