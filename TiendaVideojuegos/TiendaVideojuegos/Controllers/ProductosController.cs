@@ -169,8 +169,6 @@ namespace TiendaVideojuegos.Controllers
         }
 
         // POST: Productos/ComprarArticulosAProveedor
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ComprarArticulosAProveedor([Bind("IdProducto,IdProveedor,Cantidad")] ComprarArticulosViewModel compra)
@@ -218,6 +216,164 @@ namespace TiendaVideojuegos.Controllers
 
             return BadRequest();
             
+        }
+
+        // POST: Productos/ComprarArticuloNuevo
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ComprarArticuloNuevo([Bind("IdProducto")] Guid IdProducto)
+        {
+            Productos producto = _context.Productos.FirstOrDefault(p => p.IdProducto == IdProducto);
+            Abonados usuario_logueado = Services.UsuarioLogueado.Usuario;
+            if (producto != null && usuario_logueado != null)
+            {
+                Articulos articulo = _context.Articulos.FirstOrDefault(p => p.IdProducto == producto.IdProducto);
+
+                if (articulo != null)
+                {
+                    ArticulosNuevosAbastecimiento articuloNuevo = articulo.ArticuloNuevoAbastecimiento;
+
+                    if (articuloNuevo != null)
+                    {
+                        //se generan articulos auxiliares que insertaremos en la venta
+                        Articulos articuloAux = new Articulos
+                        {
+                            Producto = producto,
+                            IdProducto = producto.IdProducto,
+                            IdUnidad = articulo.IdUnidad,
+                            ArticuloNuevoAbastecimiento = null,
+                            ArticuloSegundaManoReventa = null,
+                            Venta = null
+                        };
+
+                        ArticulosNuevosAbastecimiento articuloNuevoAux = new ArticulosNuevosAbastecimiento
+                        {
+                            Articulo = articuloAux,
+                            IdAbastecimiento = articuloNuevo.IdAbastecimiento,
+                            IdProveedor = articuloNuevo.IdProveedor,
+                            IdUnidad = articuloAux.IdUnidad,
+                            Proveedor = articuloNuevo.Proveedor,
+                        };
+
+                        articuloAux.ArticuloNuevoAbastecimiento = articuloNuevoAux;
+                        articuloNuevoAux.Articulo = articuloAux;
+                        articuloAux.ArticuloNuevoAbastecimiento = articuloNuevoAux;
+
+                        //se genera la venta del artículo y se elimina del almacén de artículos disponibles
+                        Ventas venta = new Ventas
+                        {
+                            Abonado = usuario_logueado,
+                            Articulo = articuloAux,
+                            IdAbonado = usuario_logueado.IdAbonado,
+                            IdUnidad = articuloAux.IdUnidad,
+                            FechaVenta = DateTime.Now
+                        };
+
+                        articuloAux.Venta = venta;
+                        venta.Articulo = articuloAux;
+
+                        //una vez generada la venta se eliminan los artículos del sistema, se almacena la venta y se suma el dinero a la caja
+                        _context.ArticulosNuevosAbastecimientos.Remove(articuloNuevo);
+                        _context.Articulos.Remove(articulo);
+                        _context.Ventas.Add(venta);
+                        await _context.SaveChangesAsync();
+
+                        Services.Caja.DineroTotal += producto.Precio;
+
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+
+            return BadRequest();
+
+        }
+
+        // POST: Productos/ComprarArticuloSegundaMano
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ComprarArticuloSegundaMano([Bind("IdProducto")] Guid IdProducto)
+        {
+            Productos producto = _context.Productos.FirstOrDefault(p => p.IdProducto == IdProducto);
+            Abonados usuario_logueado = Services.UsuarioLogueado.Usuario;
+            if (producto != null && usuario_logueado != null)
+            {
+                Articulos articulo = _context.Articulos.FirstOrDefault(p => p.IdProducto == producto.IdProducto);
+
+                if (articulo != null)
+                {
+                    ArticulosSegundaManoReventa articuloSegundaMano = articulo.ArticuloSegundaManoReventa;
+
+                    if (articuloSegundaMano != null)
+                    {
+                        //se generan articulos auxiliares que insertaremos en la venta
+                        Articulos articuloAux = new Articulos
+                        {
+                            Producto = producto,
+                            IdProducto = producto.IdProducto,
+                            IdUnidad = articulo.IdUnidad,
+                            ArticuloNuevoAbastecimiento = null,
+                            ArticuloSegundaManoReventa = null,
+                            Venta = null
+                        };
+
+                        ArticulosSegundaManoReventa articuloSegundaManoAux = new ArticulosSegundaManoReventa
+                        {
+                            Articulo = articuloAux,
+                            Abonado = articuloSegundaMano.Abonado,
+                            IdUnidad = articuloAux.IdUnidad,
+                            IdAbonado = articuloSegundaMano.IdAbonado,
+                            Estado = articuloSegundaMano.Estado,
+                        };
+
+                        articuloAux.ArticuloSegundaManoReventa= articuloSegundaManoAux;
+                        articuloSegundaManoAux.Articulo = articuloAux;
+                        articuloAux.ArticuloSegundaManoReventa = articuloSegundaManoAux;
+
+                        //se genera la venta del artículo y se elimina del almacén de artículos disponibles
+                        Ventas venta = new Ventas
+                        {
+                            Abonado = usuario_logueado,
+                            Articulo = articuloAux,
+                            IdAbonado = usuario_logueado.IdAbonado,
+                            IdUnidad = articuloAux.IdUnidad,
+                            FechaVenta = DateTime.Now
+                        };
+
+                        articuloAux.Venta = venta;
+                        venta.Articulo = articuloAux;
+
+                        //una vez generada la venta se eliminan los artículos del sistema, se almacena la venta y se suma el dinero a la caja
+                        _context.ArticulosSegundaManoReventa.Remove(articuloSegundaManoAux);
+                        _context.Articulos.Remove(articulo);
+                        _context.Ventas.Add(venta);
+                        await _context.SaveChangesAsync();
+
+                        Services.Caja.DineroTotal += producto.Precio;
+
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+
+            return BadRequest();
+
         }
     }
 }
