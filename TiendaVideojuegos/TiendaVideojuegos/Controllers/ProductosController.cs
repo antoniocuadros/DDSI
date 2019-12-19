@@ -151,7 +151,15 @@ namespace TiendaVideojuegos.Controllers
         {
             return _context.Productos.Any(e => e.IdProducto == id);
         }
-        
+
+        [HttpGet("Productos/ProductoSeleccionadoAdmin/{id?}")]
+        public async Task<IActionResult> ProductoSeleccionadoAdmin([FromRoute] Guid id)
+        {
+            Productos producto = _context.Productos.FirstOrDefault(p => p.IdProducto == id);
+
+            return View(producto);
+        }
+
         // GET: Productos/Comprar/id_producto
         [HttpGet("Productos/Comprar/{id?}")]
         public async Task<IActionResult> Comprar([FromRoute] Guid id)
@@ -279,7 +287,12 @@ namespace TiendaVideojuegos.Controllers
                         _context.ArticulosNuevosAbastecimientos.Remove(articuloNuevo);
                         _context.Articulos.Remove(articulo);
                         _context.Ventas.Add(venta);
-                        // puede que haga falta borrarlo de la lista de artículos del producto
+
+                        // añadimos la venta a la lista de ventas (comprados) del Abonado
+                        var abonado = _context.Abonados.FirstOrDefault(p => p.IdAbonado == usuario_logueado.IdAbonado);
+                        abonado.Ventas.Add(venta);
+                        _context.Update(abonado);
+
                         await _context.SaveChangesAsync();
 
                         Services.Caja.DineroTotal += producto.Precio;
@@ -359,6 +372,12 @@ namespace TiendaVideojuegos.Controllers
                         _context.ArticulosSegundaManoReventa.Remove(articuloSegundaManoAux);
                         _context.Articulos.Remove(articulo);
                         _context.Ventas.Add(venta);
+
+                        // añadimos la venta a la lista de ventas (comprados) del Abonado
+                        var abonado = _context.Abonados.FirstOrDefault(p => p.IdAbonado == usuario_logueado.IdAbonado);
+                        abonado.Ventas.Add(venta);
+                        _context.Update(abonado);
+
                         await _context.SaveChangesAsync();
 
                         Services.Caja.DineroTotal += producto.Precio;
@@ -380,7 +399,7 @@ namespace TiendaVideojuegos.Controllers
 
         }
 
-        // GET: Productos/Comprar/id_producto
+        // GET: Productos/ComprarAbonado/id_producto
         [HttpGet("Productos/ComprarAbonado/{id?}")]
         public IActionResult ComprarAbonado([FromRoute] Guid id) // cambair a async si accede al repositorio
         {
@@ -395,9 +414,29 @@ namespace TiendaVideojuegos.Controllers
             return View(comprarArticuloAbonadoViewModel);
         }
 
+        // GET: Productos/ComprarArticuloNuevoGet/id_producto
+        [HttpGet("Productos/ComprarArticuloNuevoGet/{id?}")]
+        public IActionResult ComprarArticuloNuevoGet([FromRoute] Guid id) // cambair a async si accede al repositorio
+        {
+            var producto = _context.Productos.FirstOrDefault(p => p.IdProducto == id);
+
+            return View(producto);
+        }
+
+
+        // GET: Productos/ComprarArticuloSegundaManoGet/id_producto
+        [HttpGet("Productos/ComprarArticuloSegundaManoGet/{id?}")]
+        public IActionResult ComprarArticuloSegundaManoGet([FromRoute] Guid id) // cambair a async si accede al repositorio
+        {
+            var producto = _context.Productos.FirstOrDefault(p => p.IdProducto == id);
+
+            return View(producto);
+        }
+
+        //este es un dos en uno, crea el artículo que quiere vender el abonado, se inserta en su lista de Artículos que ha vendido, 
+        //lo compramos y empieza a formar parte de los artículos de nuestro sistema.
+
         // POST: Productos/ComprarArticuloAbonado
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ComprarArticuloAbonado([Bind("IdProducto, Estado")] ComprarArticuloAbonadoViewModel compra)
@@ -437,10 +476,17 @@ namespace TiendaVideojuegos.Controllers
                 }
 
 
+                //añadimos el artículo a los que ya tenemos
                 await _context.Articulos.AddAsync(articulo);
                 await _context.ArticulosSegundaManoReventa.AddAsync(articulosSegundaManoReventa);
                 producto.Articulos.Add(articulo);
                 _context.Update(producto);
+
+                //añadimos el producto que ha vendido el abonado a su lista de articulos
+                var abonadoAux = _context.Abonados.FirstOrDefault(p => p.IdAbonado == abonado.IdAbonado);
+                abonadoAux.ArticulosSegundaManoReventa.Add(articulosSegundaManoReventa);
+                _context.Update(abonadoAux);
+
                 await _context.SaveChangesAsync();
 
 
@@ -450,6 +496,8 @@ namespace TiendaVideojuegos.Controllers
             return BadRequest();
 
         }
+
+
 
     }
 }

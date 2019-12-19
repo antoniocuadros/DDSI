@@ -638,3 +638,7 @@ C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Deb
 C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\ArticulosNuevosAbastecimiento\Delete.cshtml.g.cs
 C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\ArticulosNuevosAbastecimiento\Details.cshtml.g.cs
 C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\ArticulosNuevosAbastecimiento\Index.cshtml.g.cs
+C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Productos\ComprarAbonado.cshtml.g.cs
+C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Productos\ProductoSeleccionadoAdmin.cshtml.g.cs
+C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Productos\ComprarArticuloNuevoGet.cshtml.g.cs
+C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Productos\ComprarArticuloSegundaManoGet.cshtml.g.cs

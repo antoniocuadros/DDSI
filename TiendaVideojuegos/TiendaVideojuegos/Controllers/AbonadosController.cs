@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TiendaVideojuegos.Data;
 using TiendaVideojuegos.Models;
+using TiendaVideojuegos.ViewModels;
 
 namespace TiendaVideojuegos.Controllers
 {
@@ -152,84 +153,78 @@ namespace TiendaVideojuegos.Controllers
             return _context.Abonados.Any(e => e.IdAbonado == id);
         }
 
-        //// POST: Productos/ComprarArticulosAProveedor
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> ComprarArticuloNuevo([Bind("IdProducto")] Guid IdProducto)
-        //{
-        //    Productos producto = _context.Productos.FirstOrDefault(p => p.IdProducto == IdProducto);
-        //    Abonados usuario_logueado = Services.UsuarioLogueado.Usuario;
-        //    if (producto != null && usuario_logueado != null)
-        //    {
-        //        Articulos articulo = _context.Articulos.FirstOrDefault(p => p.IdProducto == producto.IdProducto);
+        // POST: Productos/ComprarArticuloAbonado
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DevolverArticulo([Bind("IdUnidad, Estado")] DevolverArticuloViewModel devolverArticuloViewModel)
+        {
+            Abonados usuario_logueado = Services.UsuarioLogueado.Usuario;
+       
+            if (usuario_logueado != null)
+            {
+                Ventas venta = usuario_logueado.Ventas.FirstOrDefault(p => p.IdUnidad == devolverArticuloViewModel.IdUnidad);
+                Articulos articuloDevolver = venta.Articulo;
 
-        //        if (articulo != null)
-        //        {
-        //            ArticulosNuevosAbastecimiento articuloNuevo = articulo.ArticuloNuevoAbastecimiento;
+                if (articuloDevolver != null)
+                {
+                    //se generan articulos auxiliares que insertaremos en la venta
+                    Articulos articuloAux = new Articulos
+                    {
+                        Producto = articuloDevolver.Producto,
+                        IdProducto = articuloDevolver.IdProducto,
+                        IdUnidad = articuloDevolver.IdUnidad,
+                        ArticuloNuevoAbastecimiento = null,
+                        ArticuloSegundaManoReventa = null,
+                        Venta = null
+                    };
 
-        //            if (articuloNuevo != null)
-        //            {
-        //                //se generan articulos auxiliares que insertaremos en la venta
-        //                Articulos articuloAux = new Articulos
-        //                {
-        //                    Producto = producto,
-        //                    IdProducto = producto.IdProducto,
-        //                    IdUnidad = articulo.IdUnidad,
-        //                    ArticuloNuevoAbastecimiento = null,
-        //                    ArticuloSegundaManoReventa = null,
-        //                    Venta = null
-        //                };
+                    ArticulosSegundaManoReventa articuloSegundaManoAux = new ArticulosSegundaManoReventa
+                    {
+                        Articulo = articuloAux,
+                        Abonado = usuario_logueado,
+                        IdUnidad = articuloAux.IdUnidad,
+                        IdAbonado = usuario_logueado.IdAbonado,
+                        Estado = devolverArticuloViewModel.Estado,
+                    };
 
-        //                ArticulosNuevosAbastecimiento articuloNuevoAux = new ArticulosNuevosAbastecimiento
-        //                {
-        //                    Articulo = articuloAux,
-        //                    IdAbastecimiento = articuloNuevo.IdAbastecimiento,
-        //                    IdProveedor = articuloNuevo.IdProveedor,
-        //                    IdUnidad = articuloAux.IdUnidad,
-        //                    Proveedor = articuloNuevo.Proveedor,
-        //                };
+                    articuloAux.ArticuloSegundaManoReventa = articuloSegundaManoAux;
+                    articuloSegundaManoAux.Articulo = articuloAux;
+                    articuloAux.ArticuloSegundaManoReventa = articuloSegundaManoAux;
 
-        //                articuloAux.ArticuloNuevoAbastecimiento = articuloNuevoAux;
-        //                articuloNuevoAux.Articulo = articuloAux;
-        //                articuloAux.ArticuloNuevoAbastecimiento = articuloNuevoAux;
+                    //se añade el artículo a nuestro sistema
 
-        //                //se genera la venta del artículo y se elimina del almacén de artículos disponibles
-        //                Ventas venta = new Ventas
-        //                {
-        //                    Abonado = usuario_logueado,
-        //                    Articulo = articuloAux,
-        //                    IdAbonado = usuario_logueado.IdAbonado,
-        //                    IdUnidad = articuloAux.IdUnidad,
-        //                    FechaVenta = DateTime.Now
-        //                };
+                    Services.Caja.DineroTotal -= (articuloAux.Producto.Precio);
+                    if (Services.Caja.DineroTotal < 0)
+                    {
+                        return BadRequest();
+                    }
 
-        //                articuloAux.Venta = venta;
-        //                venta.Articulo = articuloAux;
+                    await _context.Articulos.AddAsync(articuloAux);
+                    await _context.ArticulosSegundaManoReventa.AddAsync(articuloSegundaManoAux);
 
-        //                //una vez generada la venta se eliminan los artículos del sistema, se almacena la venta y se suma el dinero a la caja
-        //                _context.ArticulosNuevosAbastecimientos.Remove(articuloNuevo);
-        //                _context.Articulos.Remove(articulo);
-        //                _context.Ventas.Add(venta);
-        //                await _context.SaveChangesAsync();
+                    var producto = _context.Productos.FirstOrDefault(p => p.IdProducto == articuloAux.IdProducto);
+                    producto.Articulos.Add(articuloAux);
+                    _context.Update(producto);
 
-        //                Services.Caja.DineroTotal += producto.Precio;
-        //            }
-        //            else
-        //            {
-        //                return BadRequest();
-        //            }
-        //        }
-        //        else
-        //        {
-        //            return BadRequest();
-        //        }
-        //    }
+                    // quitamos la venta de la lista de ventas (comprados) del Abonado
+                    var abonado = _context.Abonados.FirstOrDefault(p => p.IdAbonado == usuario_logueado.IdAbonado);
+                    abonado.Ventas.Remove(venta);
+                    _context.Update(abonado);
 
-        //    return BadRequest();
+                    await _context.SaveChangesAsync();
 
-        //}
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return BadRequest();
+                }
                 
+            }
+
+            return BadRequest();
+
+        }
+
     }
 }
