@@ -195,6 +195,11 @@ nav a:hover::before {
     background-size: cover;
 }
 
+.fondo-compra {
+    background: url('../images/compra.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
 table {
     width: 100%;
 }
@@ -208,7 +213,7 @@ th, td {
 
 .button {
     position: fixed;
-    left: 700px;
+    left: 750px;
     top: 150px;
 
     transition: .5s ease;
@@ -229,7 +234,7 @@ th, td {
 
 .button2 {
     position: fixed;
-    left: 700px;
+    left: 750px;
     top: 250px;
     transition: .5s ease;
     display: inline-block;
@@ -249,7 +254,7 @@ th, td {
 
 .button3 {
     position: fixed;
-    left: 700px;
+    left: 750px;
     top: 350px;
     transition: .5s ease;
     display: inline-block;
@@ -269,7 +274,7 @@ th, td {
 
 .button4 {
     position: fixed;
-    left: 700px;
+    left: 750px;
     top: 450px;
     transition: .5s ease;
     display: inline-block;
@@ -287,6 +292,97 @@ th, td {
     text-align: center;
 }
 
+.button5 {
+    position: fixed;
+    left: 90px;
+    top: 250px;
+    transition: .5s ease;
+    display: inline-block;
+    padding: 0.7em 1.4em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.15em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto',sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #000;
+    background-color: #60ff00;
+    box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+    text-align: center;
+}
+
+.button6 {
+    position: fixed;
+    left: 165px;
+    top: 250px;
+    transition: .5s ease;
+    display: inline-block;
+    padding: 0.7em 1.4em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.15em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto',sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #000;
+    background-color: #ff0000;
+    box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+    text-align: center;
+}
+
+
 .button:hover {
     background-color: #3390ff
 }
+
+.button2:hover {
+    background-color: #3390ff
+}
+.button3:hover {
+    background-color: #3390ff
+}
+.button4:hover {
+    background-color: #3390ff
+}
+.button5:hover {
+    background-color: #56e003
+}
+
+.button6:hover {
+    background-color: #d80202
+}
+
+
+.login-box2 {
+    width: 320px;
+    min-height: 400px;
+    background: #000;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+}
+
+    .login-box2 h1 {
+        margin: 0;
+        padding: 0 0 20px;
+        text-align: center;
+        font-size: 22px;
+    }
+
+    .login-box2 label {
+        margin: 0;
+        padding: 0;
+        font-weight: bold;
+        display: block;
+    }
+
+    .login-box2 input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
