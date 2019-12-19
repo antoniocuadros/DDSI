@@ -10,9 +10,16 @@ namespace TiendaVideojuegos.Models
     {
         [Required]
         public Guid IdUnidad { get; set; }
+
+        [Required]
         public Guid IdAbonado { get; set; }
+
         public DateTime FechaVenta { get; set; }
+
+        [Required]
         public Abonados Abonado { get; set; }
+
+        [Required]
         public Articulos Articulo { get; set; }
     }
 }
