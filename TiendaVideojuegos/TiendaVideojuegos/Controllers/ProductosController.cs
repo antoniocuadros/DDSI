@@ -208,6 +208,9 @@ namespace TiendaVideojuegos.Controllers
 
                 await _context.Articulos.AddAsync(articulo);
                 await _context.ArticulosNuevosAbastecimientos.AddAsync(articulosNuevosAbastecimiento);
+                //PUEDE QUE HAGA FALTA AÑADIRLO A LISTA DE PRODUCTOS
+                producto.Articulos.Add(articulo);
+                _context.Update(producto);
                 await _context.SaveChangesAsync();
                 
 
@@ -276,6 +279,7 @@ namespace TiendaVideojuegos.Controllers
                         _context.ArticulosNuevosAbastecimientos.Remove(articuloNuevo);
                         _context.Articulos.Remove(articulo);
                         _context.Ventas.Add(venta);
+                        // puede que haga falta borrarlo de la lista de artículos del producto
                         await _context.SaveChangesAsync();
 
                         Services.Caja.DineroTotal += producto.Precio;
@@ -375,5 +379,77 @@ namespace TiendaVideojuegos.Controllers
             return BadRequest();
 
         }
+
+        // GET: Productos/Comprar/id_producto
+        [HttpGet("Productos/ComprarAbonado/{id?}")]
+        public IActionResult ComprarAbonado([FromRoute] Guid id) // cambair a async si accede al repositorio
+        {
+            //var producto = _context.Productos.FirstOrDefault(p => p.IdProducto == id);
+
+            var comprarArticuloAbonadoViewModel = new ComprarArticuloAbonadoViewModel()
+            {
+                IdProducto = id,
+                Estado = ""
+            };
+
+            return View(comprarArticuloAbonadoViewModel);
+        }
+
+        // POST: Productos/ComprarArticuloAbonado
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ComprarArticuloAbonado([Bind("IdProducto, Estado")] ComprarArticuloAbonadoViewModel compra)
+        {
+            Productos producto = _context.Productos.FirstOrDefault(p => p.IdProducto == compra.IdProducto);
+            Abonados abonado = Services.UsuarioLogueado.Usuario;
+
+            if (producto != null && abonado != null)
+            {
+                Articulos articulo = new Articulos
+                {
+                    Producto = producto,
+                    IdProducto = producto.IdProducto,
+                    IdUnidad = Guid.NewGuid(),
+                    ArticuloNuevoAbastecimiento = null,
+                    ArticuloSegundaManoReventa = null,
+                    Venta = null
+                };
+
+                ArticulosSegundaManoReventa articulosSegundaManoReventa = new ArticulosSegundaManoReventa
+                {
+                    Articulo = articulo,
+                    Estado = compra.Estado,
+                    IdAbonado = abonado.IdAbonado,
+                    IdUnidad = articulo.IdUnidad,
+                    Abonado = abonado
+                };
+
+                articulo.ArticuloSegundaManoReventa = articulosSegundaManoReventa;
+                articulosSegundaManoReventa.Articulo = articulo;
+                articulo.ArticuloSegundaManoReventa = articulosSegundaManoReventa;
+
+                Services.Caja.DineroTotal -= (producto.Precio);
+                if (Services.Caja.DineroTotal < 0)
+                {
+                    return BadRequest();
+                }
+
+
+                await _context.Articulos.AddAsync(articulo);
+                await _context.ArticulosSegundaManoReventa.AddAsync(articulosSegundaManoReventa);
+                producto.Articulos.Add(articulo);
+                _context.Update(producto);
+                await _context.SaveChangesAsync();
+
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return BadRequest();
+
+        }
+
     }
 }
