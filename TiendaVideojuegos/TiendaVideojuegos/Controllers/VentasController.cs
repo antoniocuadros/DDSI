@@ -46,33 +46,6 @@ namespace TiendaVideojuegos.Controllers
             return View(ventas);
         }
 
-        // GET: Ventas/Create
-        public IActionResult Create()
-        {
-            ViewData["IdAbonado"] = new SelectList(_context.Abonados, "IdAbonado", "IdAbonado");
-            ViewData["IdUnidad"] = new SelectList(_context.Articulos, "IdUnidad", "IdUnidad");
-            return View();
-        }
-
-        // POST: Ventas/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdUnidad,IdAbonado,FechaVenta")] Ventas ventas)
-        {
-            if (ModelState.IsValid)
-            {
-                ventas.IdUnidad = Guid.NewGuid();
-                _context.Add(ventas);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["IdAbonado"] = new SelectList(_context.Abonados, "IdAbonado", "IdAbonado", ventas.IdAbonado);
-            ViewData["IdUnidad"] = new SelectList(_context.Articulos, "IdUnidad", "IdUnidad", ventas.IdUnidad);
-            return View(ventas);
-        }
-
         // GET: Ventas/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
@@ -86,8 +59,8 @@ namespace TiendaVideojuegos.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdAbonado"] = new SelectList(_context.Abonados, "IdAbonado", "IdAbonado", ventas.IdAbonado);
-            ViewData["IdUnidad"] = new SelectList(_context.Articulos, "IdUnidad", "IdUnidad", ventas.IdUnidad);
+            //ViewData["IdAbonado"] = new SelectList(_context.Abonados, "IdAbonado", "IdAbonado", ventas.IdAbonado);
+            //ViewData["IdUnidad"] = new SelectList(_context.Articulos, "IdUnidad", "IdUnidad", ventas.IdUnidad);
             return View(ventas);
         }
 

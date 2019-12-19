@@ -46,33 +46,6 @@ namespace TiendaVideojuegos.Controllers
             return View(articulosSegundaManoReventa);
         }
 
-        // GET: ArticulosSegundaManoReventas/Create
-        public IActionResult Create()
-        {
-            ViewData["IdAbonado"] = new SelectList(_context.Abonados, "IdAbonado", "IdAbonado");
-            ViewData["IdUnidad"] = new SelectList(_context.Articulos, "IdUnidad", "IdUnidad");
-            return View();
-        }
-
-        // POST: ArticulosSegundaManoReventas/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdUnidad,Estado,IdAbonado")] ArticulosSegundaManoReventa articulosSegundaManoReventa)
-        {
-            if (ModelState.IsValid)
-            {
-                articulosSegundaManoReventa.IdUnidad = Guid.NewGuid();
-                _context.Add(articulosSegundaManoReventa);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["IdAbonado"] = new SelectList(_context.Abonados, "IdAbonado", "IdAbonado", articulosSegundaManoReventa.IdAbonado);
-            ViewData["IdUnidad"] = new SelectList(_context.Articulos, "IdUnidad", "IdUnidad", articulosSegundaManoReventa.IdUnidad);
-            return View(articulosSegundaManoReventa);
-        }
-
         // GET: ArticulosSegundaManoReventas/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
@@ -86,8 +59,8 @@ namespace TiendaVideojuegos.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdAbonado"] = new SelectList(_context.Abonados, "IdAbonado", "IdAbonado", articulosSegundaManoReventa.IdAbonado);
-            ViewData["IdUnidad"] = new SelectList(_context.Articulos, "IdUnidad", "IdUnidad", articulosSegundaManoReventa.IdUnidad);
+            //ViewData["IdAbonado"] = new SelectList(_context.Abonados, "IdAbonado", "IdAbonado", articulosSegundaManoReventa.IdAbonado);
+            //ViewData["IdUnidad"] = new SelectList(_context.Articulos, "IdUnidad", "IdUnidad", articulosSegundaManoReventa.IdUnidad);
             return View(articulosSegundaManoReventa);
         }
 
@@ -96,7 +69,7 @@ namespace TiendaVideojuegos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdUnidad,Estado,IdAbonado")] ArticulosSegundaManoReventa articulosSegundaManoReventa)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdUnidad, Estado")] ArticulosSegundaManoReventa articulosSegundaManoReventa)
         {
             if (id != articulosSegundaManoReventa.IdUnidad)
             {
@@ -123,8 +96,8 @@ namespace TiendaVideojuegos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdAbonado"] = new SelectList(_context.Abonados, "IdAbonado", "IdAbonado", articulosSegundaManoReventa.IdAbonado);
-            ViewData["IdUnidad"] = new SelectList(_context.Articulos, "IdUnidad", "IdUnidad", articulosSegundaManoReventa.IdUnidad);
+            //ViewData["IdAbonado"] = new SelectList(_context.Abonados, "IdAbonado", "IdAbonado", articulosSegundaManoReventa.IdAbonado);
+            //ViewData["IdUnidad"] = new SelectList(_context.Articulos, "IdUnidad", "IdUnidad", articulosSegundaManoReventa.IdUnidad);
             return View(articulosSegundaManoReventa);
         }
 
