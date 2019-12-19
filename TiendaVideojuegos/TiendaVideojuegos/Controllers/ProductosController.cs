@@ -55,7 +55,7 @@ namespace TiendaVideojuegos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdProducto,Nombre,Precio,Descripcion,FechaLanzamiento,Plataforma")] Productos productos)
+        public async Task<IActionResult> Create([Bind("IdProducto,Nombre,Precio,Descripcion,FechaLanzamiento,Plataforma,Imagen")] Productos productos)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace TiendaVideojuegos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdProducto,Nombre,Precio,Descripcion,FechaLanzamiento,Plataforma")] Productos productos)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdProducto,Nombre,Precio,Descripcion,FechaLanzamiento,Plataforma,Imagen")] Productos productos)
         {
             if (id != productos.IdProducto)
             {

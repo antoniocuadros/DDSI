@@ -626,7 +626,6 @@ C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Deb
 C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Productos\Comprar.cshtml.g.cs
 C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Articulos\Delete.cshtml.g.cs
 C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Articulos\Details.cshtml.g.cs
-C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Articulos\Edit.cshtml.g.cs
 C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Articulos\Index.cshtml.g.cs
 C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\ArticulosSegundaManoReventas\Delete.cshtml.g.cs
 C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\ArticulosSegundaManoReventas\Details.cshtml.g.cs
@@ -638,5 +637,4 @@ C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Deb
 C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Ventas\Index.cshtml.g.cs
 C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\ArticulosNuevosAbastecimiento\Delete.cshtml.g.cs
 C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\ArticulosNuevosAbastecimiento\Details.cshtml.g.cs
-C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\ArticulosNuevosAbastecimiento\Edit.cshtml.g.cs
 C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\ArticulosNuevosAbastecimiento\Index.cshtml.g.cs

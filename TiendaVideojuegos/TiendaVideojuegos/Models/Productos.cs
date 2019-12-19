@@ -14,5 +14,6 @@ namespace TiendaVideojuegos.Models
         public DateTime FechaLanzamiento { get; set; }
         public string Plataforma { get; set; }
         public List<Articulos> Articulos { get; set; }
+        public string Imagen { get; set; }
     }
 }
