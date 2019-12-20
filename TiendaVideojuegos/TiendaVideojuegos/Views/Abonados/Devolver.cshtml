@@ -1,13 +1,20 @@
 ﻿@model List<TiendaVideojuegos.Models.Ventas>
 
-<h1>Devolver</h1>
+<body class="fondo-compra">
+    <center>
+        <font color="white">
+            <h1>Devolver</h1>
+        </font>
+    </center>
+    <hr />
 
 @foreach(var item in @Model)
 {
+    var contador = 100;
 <dl class="row">
     <dt class="col-sm-2">
-        Fecha venta: @item.FechaVenta
-        <a class="button"
+       <font color="white"> Fecha venta: @item.FechaVenta </font>
+        <a class="button11" style="margin-top:auto"
            sp-area="" asp-controller="Abonados" asp-action="DevolverConcreto" asp-route-id="@item.Articulo.IdUnidad">
             Devolver articulo
         </a>
@@ -21,3 +28,5 @@
    
 </dl>
 }
+
+</body>
