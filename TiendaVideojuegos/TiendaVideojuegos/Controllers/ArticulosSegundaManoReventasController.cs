@@ -54,7 +54,9 @@ namespace TiendaVideojuegos.Controllers
                 return NotFound();
             }
 
-            var articulosSegundaManoReventa = await _context.ArticulosSegundaManoReventa.FindAsync(id);
+            var articulosSegundaManoReventa = await _context.ArticulosSegundaManoReventa.Include(q => q.Abonado).
+                Include(p => p.Articulo).FirstOrDefaultAsync(a => a.IdUnidad == id);
+
             if (articulosSegundaManoReventa == null)
             {
                 return NotFound();
@@ -68,12 +70,16 @@ namespace TiendaVideojuegos.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("IdUnidad, Estado")] ArticulosSegundaManoReventa articulosSegundaManoReventa)
+        public async Task<IActionResult> Edit(Guid id, [Bind("IdUnidad, Estado, Abonado, Articulo, IdAbonado")] ArticulosSegundaManoReventa articulosSegundaManoReventa)
         {
+                    
             if (id != articulosSegundaManoReventa.IdUnidad)
             {
                 return NotFound();
             }
+
+            //articulosSegundaManoReventa = _context.ArticulosSegundaManoReventa.Include(a => a.Abonado).Include(b => b.Articulo)
+            //    .FirstOrDefault(p => p.IdUnidad == articulosSegundaManoReventa.IdUnidad);
 
             if (ModelState.IsValid)
             {

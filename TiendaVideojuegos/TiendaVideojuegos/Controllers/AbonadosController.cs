@@ -188,7 +188,6 @@ namespace TiendaVideojuegos.Controllers
         {
             var devolverArticuloViewModel = new DevolverArticuloViewModel()
             {
-                Estado = "",
                 IdUnidad = id,
             };
 
@@ -199,7 +198,7 @@ namespace TiendaVideojuegos.Controllers
         // POST: Abonados/Devolver
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DevolverArticulo([Bind("IdUnidad, Estado")] DevolverArticuloViewModel devolverArticuloViewModel)
+        public async Task<IActionResult> DevolverArticulo([Bind("IdUnidad")] DevolverArticuloViewModel devolverArticuloViewModel)
         {
             Abonados usuario_logueado = Services.UsuarioLogueado.Usuario;
        

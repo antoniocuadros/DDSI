@@ -8,6 +8,5 @@ namespace TiendaVideojuegos.ViewModels
     public class DevolverArticuloViewModel
     {
         public Guid IdUnidad { get; set; }
-        public string Estado { get; set; }
     }
 }

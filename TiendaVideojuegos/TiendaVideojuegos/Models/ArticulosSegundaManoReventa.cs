@@ -16,11 +16,7 @@ namespace TiendaVideojuegos.Models
 
         [Required]
         public Guid IdAbonado { get; set; }
-
-        [Required]
         public Articulos Articulo { get; set; }
-
-        [Required]
         public Abonados Abonado { get; set; }
     }
 }

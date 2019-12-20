@@ -1,9 +1,5 @@
 ﻿@model TiendaVideojuegos.Models.ArticulosSegundaManoReventa
 
-@{
-    ViewData["Title"] = "Edit";
-}
-
 <body class="fondo-compra">
     <center>
         <font color="white">
@@ -18,6 +14,10 @@
             <div class="login-box">
                 <form asp-action="Edit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="IdUnidad" />
+                    <input type="hidden" asp-for="Abonado" />
+                    <input type="hidden" asp-for="Articulo" />
+                    <input type="hidden" asp-for="IdAbonado" />
                     <input type="hidden" asp-for="IdUnidad" />
                     <div class="form-group">
                         <label asp-for="Estado" class="control-label"></label>
