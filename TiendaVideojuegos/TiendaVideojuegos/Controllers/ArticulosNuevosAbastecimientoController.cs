@@ -46,62 +46,6 @@ namespace TiendaVideojuegos.Controllers
             return View(articulosNuevosAbastecimiento);
         }
 
-        //// GET: ArticulosNuevosAbastecimientoes/Edit/5
-        //public async Task<IActionResult> Edit(Guid? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var articulosNuevosAbastecimiento = await _context.ArticulosNuevosAbastecimientos.FindAsync(id);
-        //    if (articulosNuevosAbastecimiento == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    ViewData["IdUnidad"] = new SelectList(_context.Articulos, "IdUnidad", "IdUnidad", articulosNuevosAbastecimiento.IdUnidad);
-        //    ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor", articulosNuevosAbastecimiento.IdProveedor);
-        //    return View(articulosNuevosAbastecimiento);
-        //}
-
-        //// POST: ArticulosNuevosAbastecimientoes/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(Guid id, [Bind("IdUnidad,IdAbastecimiento,IdProveedor")] ArticulosNuevosAbastecimiento articulosNuevosAbastecimiento)
-        //{
-        //    if (id != articulosNuevosAbastecimiento.IdUnidad)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(articulosNuevosAbastecimiento);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!ArticulosNuevosAbastecimientoExists(articulosNuevosAbastecimiento.IdUnidad))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["IdUnidad"] = new SelectList(_context.Articulos, "IdUnidad", "IdUnidad", articulosNuevosAbastecimiento.IdUnidad);
-        //    ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor", articulosNuevosAbastecimiento.IdProveedor);
-        //    return View(articulosNuevosAbastecimiento);
-        //}
-
-        // GET: ArticulosNuevosAbastecimientoes/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)

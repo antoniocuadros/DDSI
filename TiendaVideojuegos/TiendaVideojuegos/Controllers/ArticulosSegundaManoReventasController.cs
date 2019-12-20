@@ -59,8 +59,7 @@ namespace TiendaVideojuegos.Controllers
             {
                 return NotFound();
             }
-            //ViewData["IdAbonado"] = new SelectList(_context.Abonados, "IdAbonado", "IdAbonado", articulosSegundaManoReventa.IdAbonado);
-            //ViewData["IdUnidad"] = new SelectList(_context.Articulos, "IdUnidad", "IdUnidad", articulosSegundaManoReventa.IdUnidad);
+
             return View(articulosSegundaManoReventa);
         }
 
@@ -96,8 +95,7 @@ namespace TiendaVideojuegos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["IdAbonado"] = new SelectList(_context.Abonados, "IdAbonado", "IdAbonado", articulosSegundaManoReventa.IdAbonado);
-            //ViewData["IdUnidad"] = new SelectList(_context.Articulos, "IdUnidad", "IdUnidad", articulosSegundaManoReventa.IdUnidad);
+            
             return View(articulosSegundaManoReventa);
         }
 
