@@ -1,57 +1,78 @@
 ﻿@model TiendaVideojuegos.Models.Productos
 
-<h3>Datos del producto @Model.Nombre</h3>
+
 <head>
     <link rel="stylesheet" href="~/css/estilos.css">
 </head>
-<hr />
-<body>
-    <img src="~/images/portadas/@Model.Imagen" width="300" height="400" style="float:left" />
-    <p>
 
-        <h4>  &nbsp;&nbsp;&nbsp;&nbsp; Nombre: @Model.Nombre</h4>
-        <h4>  &nbsp;&nbsp;&nbsp;&nbsp; Precio: @Model.Precio €</h4>
-        <h4>  &nbsp;&nbsp;&nbsp;&nbsp; Descripción: @Model.Descripcion</h4>
-        <h4>  &nbsp;&nbsp;&nbsp;&nbsp; Fecha lanzamiento: @Model.FechaLanzamiento</h4>
-        <h4> &nbsp;&nbsp;&nbsp;&nbsp; Plataforma: @Model.Plataforma</h4>
-        <h4>  &nbsp;&nbsp;&nbsp;&nbsp; Imagen: @Model.Imagen</h4>
+<body class="fondo-compra">
+    <div class="container-propio">
+        <font color="white">
+            <hr />
+            <h1>Datos del producto @Model.Nombre</h1>
+            <hr />
+        </font>
+        <br />
+        <br />
+        <img src="~/images/portadas/@Model.Imagen" width="300" height="400" style="float:left" />
+        <p>
+            <font color="white">
+                <br />
+                <br />
+                <br />
+                <h4>  &nbsp;&nbsp;&nbsp;&nbsp; Nombre: @Model.Nombre</h4>
+                <h4>  &nbsp;&nbsp;&nbsp;&nbsp; Precio: @Model.Precio €</h4>
+                <h4>  &nbsp;&nbsp;&nbsp;&nbsp; Descripción: @Model.Descripcion</h4>
+                <h4>  &nbsp;&nbsp;&nbsp;&nbsp; Fecha lanzamiento: @Model.FechaLanzamiento</h4>
+                <h4> &nbsp;&nbsp;&nbsp;&nbsp; Plataforma: @Model.Plataforma</h4>
+                <h4>  &nbsp;&nbsp;&nbsp;&nbsp; Imagen: @Model.Imagen</h4>
+            </font>
 
-        @if (TiendaVideojuegos.Services.UsuarioLogueado.Usuario != null)
-        {
-            @if (TiendaVideojuegos.Services.UsuarioLogueado.Usuario.Nombre == "admin")
+            @if (TiendaVideojuegos.Services.UsuarioLogueado.Usuario != null)
             {
-                <h4>  &nbsp;&nbsp;&nbsp;&nbsp; IdProducto: @Model.IdProducto</h4>
-                <h4>  &nbsp;&nbsp;&nbsp;&nbsp; Articulos: @Model.Articulos</h4>
+                @if (TiendaVideojuegos.Services.UsuarioLogueado.Usuario.Nombre == "admin")
+                {
+                    <h4>  &nbsp;&nbsp;&nbsp;&nbsp; IdProducto: @Model.IdProducto</h4>
+                    @if (Model.Articulos != null)
+                    {
+                        foreach (var item in Model.Articulos)
+                        {
+                            <h4>  &nbsp;&nbsp;&nbsp;&nbsp; Articulos: @item.IdUnidad</h4>
+                        }
+                    }
+
+                }
+
             }
-        }
 
-        <a class="button" style="margin-right:700px;"
-           asp-area="" asp-controller="Productos" asp-action="Comprar" asp-route-id="@Model.IdProducto">
-            Comprar producto a proveedor
-        </a>
+            <a class="button"
+               asp-area="" asp-controller="Productos" asp-action="Comprar" asp-route-id="@Model.IdProducto">
+                Comprar producto a proveedor
+            </a>
 
-        <a class="button2" style="margin-right:700px;"
-           asp-area="" asp-controller="Productos" asp-action="ComprarArticuloNuevoGet" asp-route-id="@Model.IdProducto">
-            Comprar Artículo nuevo
-        </a>
+            <a class="button2"
+               asp-area="" asp-controller="Productos" asp-action="ComprarArticuloNuevoGet" asp-route-id="@Model.IdProducto">
+                Comprar Artículo nuevo
+            </a>
 
-        <a class="button3" style="margin-right:700px;"
-           asp-area="" asp-controller="Productos" asp-action="ComprarArticuloSegundaManoGet" asp-route-id="@Model.IdProducto">
-            Comprar Artículo Segunda Mano
-        </a>
+            <a class="button3"
+               asp-area="" asp-controller="Productos" asp-action="ComprarArticuloSegundaManoGet" asp-route-id="@Model.IdProducto">
+                Comprar Artículo Segunda Mano
+            </a>
 
-        <a class="button4" style="margin-right:700px;"
-           asp-area="" asp-controller="Productos" asp-action="ComprarAbonado" asp-route-id="@Model.IdProducto">
-            Vender artículo Segunda Mano
-        </a>
-    </p>
+            <a class="button4"
+               asp-area="" asp-controller="Productos" asp-action="ComprarAbonado" asp-route-id="@Model.IdProducto">
+                Vender artículo Segunda Mano
+            </a>
+        </p>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
 </body>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<hr />
+

@@ -4,29 +4,33 @@
     ViewData["Title"] = "Comprar";
 }
 
-<h1>Formulario para compra del producto con id - @Model.IdProducto</h1>
+    <body class="fondo-compra">
+        <center>
+            <font color="white">
+                <h1>Formulario para compra</h1>
+            </font>
+        </center>
+            <hr />
+            <div class="login-box2">
+                <div class="col-md-4">
+                    <form asp-action="ComprarArticulosAProveedor">
+                        <div class="form-group">
+                            <label asp-for="IdProducto" class="control-label"></label>
+                            <input asp-for="IdProducto" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="IdProveedor" class="control-label"></label>
+                            <input asp-for="IdProveedor" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Cantidad" class="control-label"></label>
+                            <input asp-for="Cantidad" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-<h4>Productos</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="ComprarArticulosAProveedor">
-            <div class="form-group">
-                <label asp-for="IdProducto" class="control-label"></label>
-                <input asp-for="IdProducto" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="IdProveedor" class="control-label"></label>
-                <input asp-for="IdProveedor" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Cantidad" class="control-label"></label>
-                <input asp-for="Cantidad" class="form-control" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
+    </body>

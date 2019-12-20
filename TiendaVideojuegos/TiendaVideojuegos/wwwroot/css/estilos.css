@@ -53,7 +53,7 @@ body {
 }
 
 header {
-    background: #000;
+    background: #1b1717;
     max-height: 100px;
 }
 
@@ -200,6 +200,16 @@ nav a:hover::before {
     background-size: cover;
 }
 
+.fondo-inicio {
+    background: url('../images/azul.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.fondo-seleccion {
+    background: url('../images/joycon.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
 table {
     width: 100%;
 }
@@ -213,9 +223,8 @@ th, td {
 
 .button {
     position: fixed;
-    left: 750px;
-    top: 150px;
-
+    left: 58%;
+    top: 190px;
     transition: .5s ease;
     display: inline-block;
     padding: 0.7em 1.4em;
@@ -226,16 +235,16 @@ th, td {
     font-family: 'Roboto',sans-serif;
     text-transform: uppercase;
     font-weight: 400;
-    color: #FFFFFF;
-    background-color: #3369ff;
+    color: #000;
+    background-color: #ff6a00;
     box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
     text-align: center;
 }
 
 .button2 {
     position: fixed;
-    left: 750px;
-    top: 250px;
+    left: 58%;
+    top: 290px;
     transition: .5s ease;
     display: inline-block;
     padding: 0.7em 1.4em;
@@ -246,16 +255,16 @@ th, td {
     font-family: 'Roboto',sans-serif;
     text-transform: uppercase;
     font-weight: 400;
-    color: #FFFFFF;
-    background-color: #3369ff;
+    color: #000;
+    background-color: #ff6a00;
     box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
     text-align: center;
 }
 
 .button3 {
     position: fixed;
-    left: 750px;
-    top: 350px;
+    left: 58%;
+    top: 390px;
     transition: .5s ease;
     display: inline-block;
     padding: 0.7em 1.4em;
@@ -266,16 +275,16 @@ th, td {
     font-family: 'Roboto',sans-serif;
     text-transform: uppercase;
     font-weight: 400;
-    color: #FFFFFF;
-    background-color: #3369ff;
+    color: #000;
+    background-color: #ff6a00;
     box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
     text-align: center;
 }
 
 .button4 {
     position: fixed;
-    left: 750px;
-    top: 450px;
+    left: 58%;
+    top: 490px;
     transition: .5s ease;
     display: inline-block;
     padding: 0.7em 1.4em;
@@ -286,8 +295,8 @@ th, td {
     font-family: 'Roboto',sans-serif;
     text-transform: uppercase;
     font-weight: 400;
-    color: #FFFFFF;
-    background-color: #3369ff;
+    color: #000;
+    background-color: #ff6a00;
     box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
     text-align: center;
 }
@@ -333,18 +342,38 @@ th, td {
 }
 
 
+.button7 {
+    position: fixed;
+    left: 10%;
+    top: 90px;
+    transition: .5s ease;
+    display: inline-block;
+    padding: 0.7em 1.4em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.15em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto',sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #000;
+    background-color: #ff6a00;
+    box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+    text-align: center;
+}
+
 .button:hover {
-    background-color: #3390ff
+    background-color: #d8600a
 }
 
 .button2:hover {
-    background-color: #3390ff
+    background-color: #d8600a
 }
 .button3:hover {
-    background-color: #3390ff
+    background-color: #d8600a
 }
 .button4:hover {
-    background-color: #3390ff
+    background-color: #d8600a
 }
 .button5:hover {
     background-color: #56e003
@@ -386,3 +415,26 @@ th, td {
         width: 100%;
         margin-bottom: 10px;
     }
+
+#demotext {
+    text-shadow: -2px 4px 20px #CE5937;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 29px;
+    letter-spacing: -0.6px;
+    word-spacing: -2.6px;
+    color: #ff6a00;
+    font-weight: 700;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: uppercase;
+}
+
+.container-propio {
+    background:#000;
+    width: 51%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}

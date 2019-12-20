@@ -1,23 +1,29 @@
 ﻿@model TiendaVideojuegos.ViewModels.ComprarArticuloAbonadoViewModel
+<body class="fondo-compra">
 
-<h1>Formulario para compra del producto con id - @Model.IdProducto</h1>
+    <center>
+        <font color="white">
+            <h1>Va a vender un artículo a TiendaVideojuegos</h1>
+        </font>
+    </center>
+     <hr />
 
-<h4>Productos</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="ComprarArticuloAbonado">
-            <div class="form-group">
-                <label asp-for="IdProducto" class="control-label"></label>
-                <input asp-for="IdProducto" class="form-control" />
+        <div class="login-box2">
+            <div class="col-md-4">
+                <form asp-action="ComprarArticuloAbonado">
+                    <p hidden class="form-group">
+                        <label asp-for="IdProducto" class="control-label"></label>
+                        <input asp-for="IdProducto" class="form-control" />
+                    </p>
+                    <div class="form-group">
+                        <label asp-for="Estado" class="control-label"></label>
+                        <input asp-for="Estado" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
+
+</body>
