@@ -3,15 +3,21 @@
 @{
     ViewData["Title"] = "Index";
 }
-<body class="fondo-compra">
- <center><font color="white"><h1>Productos</h1></font></center>
+    <body class="fondo-compra">
+        <center><font color="white"><h1>Productos</h1></font></center>
 
-<p>
-    <a class="button7"
-        asp-action="Create">Create New
-    </a>
-</p>
-
+        @if (TiendaVideojuegos.Services.UsuarioLogueado.Usuario != null)
+        {
+            @if (TiendaVideojuegos.Services.UsuarioLogueado.Usuario.Nombre == "admin")
+            {
+                <p>
+                    <a class="button7"
+                       asp-action="Create">
+                        Create New
+                    </a>
+                </p>
+            }
+        }
         <div class="gallery">
             @foreach (var item in Model)
             {
@@ -20,4 +26,4 @@
                 </a>
             }
         </div>
-</body>
+    </body>

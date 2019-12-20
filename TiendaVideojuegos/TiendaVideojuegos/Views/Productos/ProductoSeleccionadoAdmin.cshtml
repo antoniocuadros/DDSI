@@ -38,6 +38,10 @@
                         foreach (var item in Model.Articulos)
                         {
                             <h4>  &nbsp;&nbsp;&nbsp;&nbsp; Articulos: @item.IdUnidad</h4>
+                            <a class="button"
+                                asp-area="" asp-controller="Productos" asp-action="Comprar" asp-route-id="@Model.IdProducto">
+                                Comprar producto a proveedor
+                            </a>
                         }
                     }
 
@@ -45,10 +49,7 @@
 
             }
 
-            <a class="button"
-               asp-area="" asp-controller="Productos" asp-action="Comprar" asp-route-id="@Model.IdProducto">
-                Comprar producto a proveedor
-            </a>
+
 
             <a class="button2"
                asp-area="" asp-controller="Productos" asp-action="ComprarArticuloNuevoGet" asp-route-id="@Model.IdProducto">

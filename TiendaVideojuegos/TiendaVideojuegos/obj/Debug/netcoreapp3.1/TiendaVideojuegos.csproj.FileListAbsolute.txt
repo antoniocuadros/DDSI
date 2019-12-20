@@ -671,3 +671,4 @@ C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\o
 C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Ventas\Details.cshtml.g.cs
 C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Ventas\Edit.cshtml.g.cs
 C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Ventas\Index.cshtml.g.cs
+C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\obj\Debug\netcoreapp3.1\Razor\Views\Home\SuperMario.cshtml.g.cs

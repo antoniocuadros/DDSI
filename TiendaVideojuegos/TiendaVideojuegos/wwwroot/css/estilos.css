@@ -303,6 +303,8 @@ th, td {
 
 .button5 {
     position: fixed;
+    max-width: 66px;
+    min-height: 40px;
     left: 90px;
     top: 250px;
     transition: .5s ease;
