@@ -372,7 +372,7 @@ th, td {
 
 .button8 {
     position: absolute;
-    left: 58%;
+    left: 70%;
     top: 590px;
     transition: .5s ease;
     display: inline-block;
@@ -391,7 +391,7 @@ th, td {
 }
 .button9 {
     position: absolute;
-    left: 58%;
+    left: 70%;
     top: 690px;
     transition: .5s ease;
     display: inline-block;
