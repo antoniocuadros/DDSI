@@ -23,7 +23,7 @@ namespace TiendaVideojuegos.Controllers
         // GET: Abonados
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Abonados.ToListAsync());
+            return View(await _context.Abonados.Include(b => b.ArticulosSegundaManoReventa).Include(b => b.Ventas).ToListAsync());
         }
 
         // GET: Abonados/Details/5
@@ -34,7 +34,7 @@ namespace TiendaVideojuegos.Controllers
                 return NotFound();
             }
 
-            var abonados = await _context.Abonados
+            var abonados = await _context.Abonados.Include(b => b.ArticulosSegundaManoReventa).Include(b => b.Ventas)
                 .FirstOrDefaultAsync(m => m.IdAbonado == id);
             if (abonados == null)
             {
@@ -202,12 +202,12 @@ namespace TiendaVideojuegos.Controllers
                     await _context.Articulos.AddAsync(articuloAux);
                     await _context.ArticulosSegundaManoReventa.AddAsync(articuloSegundaManoAux);
 
-                    var producto = _context.Productos.FirstOrDefault(p => p.IdProducto == articuloAux.IdProducto);
+                    var producto = _context.Productos.Include(p => p.Articulos).FirstOrDefault(p => p.IdProducto == articuloAux.IdProducto);
                     producto.Articulos.Add(articuloAux);
                     _context.Update(producto);
 
                     // quitamos la venta de la lista de ventas (comprados) del Abonado
-                    var abonado = _context.Abonados.FirstOrDefault(p => p.IdAbonado == usuario_logueado.IdAbonado);
+                    var abonado = _context.Abonados.Include(a => a.ArticulosSegundaManoReventa).Include(b => b.Ventas).FirstOrDefault(p => p.IdAbonado == usuario_logueado.IdAbonado);
                     abonado.Ventas.Remove(venta);
                     _context.Update(abonado);
 

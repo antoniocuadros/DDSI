@@ -23,7 +23,7 @@ namespace TiendaVideojuegos.Controllers
         // GET: Productos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Productos.ToListAsync());
+            return View(await _context.Productos.Include(b => b.Articulos).ToListAsync());
         }
 
         // GET: Productos/Details/5
@@ -34,7 +34,7 @@ namespace TiendaVideojuegos.Controllers
                 return NotFound();
             }
 
-            var productos = await _context.Productos
+            var productos = await _context.Productos.Include(b => b.Articulos)
                 .FirstOrDefaultAsync(m => m.IdProducto == id);
             if (productos == null)
             {
@@ -155,7 +155,7 @@ namespace TiendaVideojuegos.Controllers
         [HttpGet("Productos/ProductoSeleccionadoAdmin/{id?}")]
         public async Task<IActionResult> ProductoSeleccionadoAdmin([FromRoute] Guid id)
         {
-            Productos producto = _context.Productos.FirstOrDefault(p => p.IdProducto == id);
+            Productos producto = _context.Productos.Include(b => b.Articulos).FirstOrDefault(p => p.IdProducto == id);
 
             return View(producto);
         }
@@ -181,8 +181,8 @@ namespace TiendaVideojuegos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ComprarArticulosAProveedor([Bind("IdProducto,IdProveedor,Cantidad")] ComprarArticulosViewModel compra)
         {
-            Productos producto = _context.Productos.FirstOrDefault(p => p.IdProducto == compra.IdProducto);
-            Proveedores proveedor = _context.Proveedores.FirstOrDefault(p => p.IdProveedor == compra.IdProveedor);
+            Productos producto = _context.Productos.Include(b => b.Articulos).FirstOrDefault(p => p.IdProducto == compra.IdProducto);
+            Proveedores proveedor = _context.Proveedores.Include(b => b.ArticulosNuevosAbastecimiento).FirstOrDefault(p => p.IdProveedor == compra.IdProveedor);
 
             if (producto != null && proveedor != null)
             {
@@ -216,11 +216,11 @@ namespace TiendaVideojuegos.Controllers
 
                 await _context.Articulos.AddAsync(articulo);
                 await _context.ArticulosNuevosAbastecimientos.AddAsync(articulosNuevosAbastecimiento);
-                //PUEDE QUE HAGA FALTA AÑADIRLO A LISTA DE PRODUCTOS
-                producto.Articulos.Add(articulo);
+
+                //actualizamos el valor del producto con el producto nuevo
                 _context.Update(producto);
+
                 await _context.SaveChangesAsync();
-                
 
                 return RedirectToAction(nameof(Index));
             }
@@ -234,11 +234,12 @@ namespace TiendaVideojuegos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ComprarArticuloNuevo([Bind("IdProducto")] Guid IdProducto)
         {
-            Productos producto = _context.Productos.FirstOrDefault(p => p.IdProducto == IdProducto);
+            Productos producto = _context.Productos.Include(b => b.Articulos).FirstOrDefault(p => p.IdProducto == IdProducto);
             Abonados usuario_logueado = Services.UsuarioLogueado.Usuario;
             if (producto != null && usuario_logueado != null)
             {
-                Articulos articulo = _context.Articulos.FirstOrDefault(p => p.IdProducto == producto.IdProducto);
+                Articulos articulo = _context.Articulos.Include(p => p.ArticuloNuevoAbastecimiento).Include(q => q.ArticuloSegundaManoReventa)
+                    .Include(r => r.Producto).Include(s => s.Venta).FirstOrDefault(p => p.IdProducto == producto.IdProducto);
 
                 if (articulo != null)
                 {
@@ -289,7 +290,7 @@ namespace TiendaVideojuegos.Controllers
                         _context.Ventas.Add(venta);
 
                         // añadimos la venta a la lista de ventas (comprados) del Abonado
-                        var abonado = _context.Abonados.FirstOrDefault(p => p.IdAbonado == usuario_logueado.IdAbonado);
+                        var abonado = _context.Abonados.Include(b => b.Ventas).Include(b => b.ArticulosSegundaManoReventa).FirstOrDefault(p => p.IdAbonado == usuario_logueado.IdAbonado);
                         abonado.Ventas.Add(venta);
                         _context.Update(abonado);
 
@@ -319,7 +320,7 @@ namespace TiendaVideojuegos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ComprarArticuloSegundaMano([Bind("IdProducto")] Guid IdProducto)
         {
-            Productos producto = _context.Productos.FirstOrDefault(p => p.IdProducto == IdProducto);
+            Productos producto = _context.Productos.Include(b => b.Articulos).FirstOrDefault(p => p.IdProducto == IdProducto);
             Abonados usuario_logueado = Services.UsuarioLogueado.Usuario;
             if (producto != null && usuario_logueado != null)
             {
@@ -374,7 +375,7 @@ namespace TiendaVideojuegos.Controllers
                         _context.Ventas.Add(venta);
 
                         // añadimos la venta a la lista de ventas (comprados) del Abonado
-                        var abonado = _context.Abonados.FirstOrDefault(p => p.IdAbonado == usuario_logueado.IdAbonado);
+                        var abonado = _context.Abonados.Include(b => b.Ventas).Include(b => b.ArticulosSegundaManoReventa).FirstOrDefault(p => p.IdAbonado == usuario_logueado.IdAbonado);
                         abonado.Ventas.Add(venta);
                         _context.Update(abonado);
 
@@ -418,7 +419,7 @@ namespace TiendaVideojuegos.Controllers
         [HttpGet("Productos/ComprarArticuloNuevoGet/{id?}")]
         public IActionResult ComprarArticuloNuevoGet([FromRoute] Guid id) // cambair a async si accede al repositorio
         {
-            var producto = _context.Productos.FirstOrDefault(p => p.IdProducto == id);
+            var producto = _context.Productos.Include(p => p.Articulos).FirstOrDefault(p => p.IdProducto == id);
 
             return View(producto);
         }
@@ -428,7 +429,7 @@ namespace TiendaVideojuegos.Controllers
         [HttpGet("Productos/ComprarArticuloSegundaManoGet/{id?}")]
         public IActionResult ComprarArticuloSegundaManoGet([FromRoute] Guid id) // cambair a async si accede al repositorio
         {
-            var producto = _context.Productos.FirstOrDefault(p => p.IdProducto == id);
+            var producto = _context.Productos.Include(p => p.Articulos).FirstOrDefault(p => p.IdProducto == id);
 
             return View(producto);
         }
@@ -441,7 +442,7 @@ namespace TiendaVideojuegos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ComprarArticuloAbonado([Bind("IdProducto, Estado")] ComprarArticuloAbonadoViewModel compra)
         {
-            Productos producto = _context.Productos.FirstOrDefault(p => p.IdProducto == compra.IdProducto);
+            Productos producto = _context.Productos.Include(p => p.Articulos).FirstOrDefault(p => p.IdProducto == compra.IdProducto);
             Abonados abonado = Services.UsuarioLogueado.Usuario;
 
             if (producto != null && abonado != null)
@@ -483,7 +484,7 @@ namespace TiendaVideojuegos.Controllers
                 _context.Update(producto);
 
                 //añadimos el producto que ha vendido el abonado a su lista de articulos
-                var abonadoAux = _context.Abonados.FirstOrDefault(p => p.IdAbonado == abonado.IdAbonado);
+                var abonadoAux = _context.Abonados.Include(b => b.Ventas).Include(b => b.ArticulosSegundaManoReventa).FirstOrDefault(p => p.IdAbonado == abonado.IdAbonado);
                 abonadoAux.ArticulosSegundaManoReventa.Add(articulosSegundaManoReventa);
                 _context.Update(abonadoAux);
 

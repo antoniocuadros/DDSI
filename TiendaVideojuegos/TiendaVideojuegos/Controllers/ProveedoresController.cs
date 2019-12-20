@@ -22,7 +22,7 @@ namespace TiendaVideojuegos.Controllers
         // GET: Proveedores
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Proveedores.ToListAsync());
+            return View(await _context.Proveedores.Include(p => p.ArticulosNuevosAbastecimiento).ToListAsync());
         }
 
         // GET: Proveedores/Details/5
@@ -33,7 +33,7 @@ namespace TiendaVideojuegos.Controllers
                 return NotFound();
             }
 
-            var proveedores = await _context.Proveedores
+            var proveedores = await _context.Proveedores.Include(p => p.ArticulosNuevosAbastecimiento)
                 .FirstOrDefaultAsync(m => m.IdProveedor == id);
             if (proveedores == null)
             {

@@ -13,14 +13,14 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
-#line 1 "C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\_ViewImports.cshtml"
+#line 1 "C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\_ViewImports.cshtml"
 using TiendaVideojuegos;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\_ViewImports.cshtml"
+#line 2 "C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\_ViewImports.cshtml"
 using TiendaVideojuegos.Models;
 
 #line default
@@ -48,7 +48,8 @@ using TiendaVideojuegos.Models;
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_15 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Productos", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_16 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "ArticulosNuevosAbastecimiento", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_17 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "ArticulosSegundaManoReventas", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
-        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_18 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "LogoutUser", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_18 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Ventas", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+        private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_19 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "LogoutUser", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
         #line hidden
         #pragma warning disable 0649
         private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext __tagHelperExecutionContext;
@@ -146,7 +147,7 @@ using TiendaVideojuegos.Models;
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n            <nav>\r\n                <ul>\r\n");
 #nullable restore
-#line 19 "C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\Shared\_Layout.cshtml"
+#line 19 "C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\Shared\_Layout.cshtml"
                      if (TiendaVideojuegos.Services.UsuarioLogueado.Usuario == null)
                     {
 
@@ -218,7 +219,7 @@ using TiendaVideojuegos.Models;
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                        </li>\r\n");
 #nullable restore
-#line 30 "C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\Shared\_Layout.cshtml"
+#line 30 "C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\Shared\_Layout.cshtml"
                     }
                     else
                     {
@@ -364,9 +365,30 @@ using TiendaVideojuegos.Models;
                 }
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
+                WriteLiteral("\r\n                            </li>\r\n                            <li class=\"nav-item\">\r\n                                ");
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b1c8c45b18d43be4fccbb08bd753f3d5f1bc60e033368", async() => {
+                    WriteLiteral("Ventas");
+                }
+                );
+                __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper>();
+                __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper);
+                __tagHelperExecutionContext.AddHtmlAttribute(__tagHelperAttribute_8);
+                __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper.Area = (string)__tagHelperAttribute_5.Value;
+                __tagHelperExecutionContext.AddTagHelperAttribute(__tagHelperAttribute_5);
+                __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper.Controller = (string)__tagHelperAttribute_18.Value;
+                __tagHelperExecutionContext.AddTagHelperAttribute(__tagHelperAttribute_18);
+                __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper.Action = (string)__tagHelperAttribute_13.Value;
+                __tagHelperExecutionContext.AddTagHelperAttribute(__tagHelperAttribute_13);
+                await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+                if (!__tagHelperExecutionContext.Output.IsContentModified)
+                {
+                    await __tagHelperExecutionContext.SetOutputContentAsync();
+                }
+                Write(__tagHelperExecutionContext.Output);
+                __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                            </li>\r\n");
 #nullable restore
-#line 56 "C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\Shared\_Layout.cshtml"
+#line 56 "C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\Shared\_Layout.cshtml"
                         }
 
 #line default
@@ -384,8 +406,8 @@ using TiendaVideojuegos.Models;
                 __tagHelperExecutionContext.AddTagHelperAttribute(__tagHelperAttribute_5);
                 __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper.Controller = (string)__tagHelperAttribute_11.Value;
                 __tagHelperExecutionContext.AddTagHelperAttribute(__tagHelperAttribute_11);
-                __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper.Action = (string)__tagHelperAttribute_18.Value;
-                __tagHelperExecutionContext.AddTagHelperAttribute(__tagHelperAttribute_18);
+                __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper.Action = (string)__tagHelperAttribute_19.Value;
+                __tagHelperExecutionContext.AddTagHelperAttribute(__tagHelperAttribute_19);
                 await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
                 if (!__tagHelperExecutionContext.Output.IsContentModified)
                 {
@@ -395,7 +417,7 @@ using TiendaVideojuegos.Models;
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                        </li>\r\n");
 #nullable restore
-#line 60 "C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\Shared\_Layout.cshtml"
+#line 60 "C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\Shared\_Layout.cshtml"
                     }
 
 #line default
@@ -415,7 +437,7 @@ using TiendaVideojuegos.Models;
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n\r\n\r\n\r\n<div>\r\n    <main role=\"main\" class=\"pb-3\">\r\n        ");
 #nullable restore
-#line 74 "C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\Shared\_Layout.cshtml"
+#line 74 "C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\Shared\_Layout.cshtml"
    Write(RenderBody());
 
 #line default
