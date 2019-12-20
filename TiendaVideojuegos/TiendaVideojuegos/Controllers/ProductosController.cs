@@ -264,14 +264,6 @@ namespace TiendaVideojuegos.Controllers
                         articulo.Venta = venta;
                         venta.Articulo = articulo;
 
-                        _context.Ventas.Add(venta);
-                        Ventas ventaprueba = await _context.Ventas.Include(v => v.Abonado).Include(v => v.Articulo)
-                        .FirstOrDefaultAsync(m => m.IdUnidad == articulo.IdUnidad);
-                        // añadimos la venta a la lista de ventas (comprados) del Abonado
-                        //var abonado = _context.Abonados.Include(b => b.Ventas).Include(b => b.ArticulosSegundaManoReventa).FirstOrDefault(p => p.IdAbonado == usuario_logueado.IdAbonado);
-                        //abonado.Ventas.Add(venta);
-                        //_context.Update(abonado);
-
                         await _context.SaveChangesAsync();
 
                         Services.Caja.DineroTotal += producto.Precio;
@@ -327,10 +319,6 @@ namespace TiendaVideojuegos.Controllers
 
                         articulo.Venta = venta;
                         venta.Articulo = articulo;
-
-                        //una vez generada la venta se eliminan los artículos del sistema, se almacena la venta y se suma el dinero a la caja
-
-                        _context.Ventas.Add(venta); //puede que haya que quitarlo
 
                         await _context.SaveChangesAsync();
 
