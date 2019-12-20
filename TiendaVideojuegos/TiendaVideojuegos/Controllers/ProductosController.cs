@@ -186,42 +186,45 @@ namespace TiendaVideojuegos.Controllers
 
             if (producto != null && proveedor != null)
             {
-                Articulos articulo = new Articulos { 
-                    Producto = producto, 
-                    IdProducto = producto.IdProducto, 
-                    IdUnidad = Guid.NewGuid(), 
-                    ArticuloNuevoAbastecimiento = null, 
-                    ArticuloSegundaManoReventa = null, 
-                    Venta = null,
-                    Vendido = false,
-                };
-
-                ArticulosNuevosAbastecimiento articulosNuevosAbastecimiento = new ArticulosNuevosAbastecimiento
+                for (int i = 0; i < compra.Cantidad;i++)
                 {
-                    Articulo = articulo,
-                    IdAbastecimiento = Guid.NewGuid(),
-                    IdProveedor = proveedor.IdProveedor,
-                    IdUnidad = articulo.IdUnidad,
-                    Proveedor = proveedor
-                };
+                    Articulos articulo = new Articulos
+                    {
+                        Producto = producto,
+                        IdProducto = producto.IdProducto,
+                        IdUnidad = Guid.NewGuid(),
+                        ArticuloNuevoAbastecimiento = null,
+                        ArticuloSegundaManoReventa = null,
+                        Venta = null,
+                        Vendido = false,
+                    };
 
-                articulo.ArticuloNuevoAbastecimiento = articulosNuevosAbastecimiento;
-                articulosNuevosAbastecimiento.Articulo = articulo;
-                articulo.ArticuloNuevoAbastecimiento = articulosNuevosAbastecimiento;
+                    ArticulosNuevosAbastecimiento articulosNuevosAbastecimiento = new ArticulosNuevosAbastecimiento
+                    {
+                        Articulo = articulo,
+                        IdAbastecimiento = Guid.NewGuid(),
+                        IdProveedor = proveedor.IdProveedor,
+                        IdUnidad = articulo.IdUnidad,
+                        Proveedor = proveedor
+                    };
+
+                    articulo.ArticuloNuevoAbastecimiento = articulosNuevosAbastecimiento;
+                    articulosNuevosAbastecimiento.Articulo = articulo;
+                    articulo.ArticuloNuevoAbastecimiento = articulosNuevosAbastecimiento;
+
+                    await _context.Articulos.AddAsync(articulo);
+                    await _context.ArticulosNuevosAbastecimientos.AddAsync(articulosNuevosAbastecimiento);
+
+                    await _context.SaveChangesAsync();
+                }
+
+                
 
                 Services.Caja.DineroTotal -= (producto.Precio) * compra.Cantidad;
                 if (Services.Caja.DineroTotal < 0)
                 {
                     return BadRequest();
                 }
-
-                await _context.Articulos.AddAsync(articulo);
-                await _context.ArticulosNuevosAbastecimientos.AddAsync(articulosNuevosAbastecimiento);
-
-                //actualizamos el valor del producto con el producto nuevo
-                _context.Update(producto);
-
-                await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
@@ -262,8 +265,11 @@ namespace TiendaVideojuegos.Controllers
                         };
 
                         articulo.Venta = venta;
-                        venta.Articulo = articulo;
 
+                        var abonado = _context.Abonados.Include(a => a.Ventas).FirstOrDefault(p => p.IdAbonado == usuario_logueado.IdAbonado);
+                        abonado.Ventas.Add(venta);
+
+                        _context.Update(abonado);
                         await _context.SaveChangesAsync();
 
                         Services.Caja.DineroTotal += producto.Precio;
@@ -318,7 +324,10 @@ namespace TiendaVideojuegos.Controllers
                         };
 
                         articulo.Venta = venta;
-                        venta.Articulo = articulo;
+
+                        var abonado = _context.Abonados.Include(a => a.Ventas).FirstOrDefault(p => p.IdAbonado == usuario_logueado.IdAbonado);
+                        abonado.Ventas.Add(venta);
+                        _context.Update(abonado);
 
                         await _context.SaveChangesAsync();
 
@@ -384,7 +393,8 @@ namespace TiendaVideojuegos.Controllers
         public async Task<IActionResult> ComprarArticuloAbonado([Bind("IdProducto, Estado")] ComprarArticuloAbonadoViewModel compra)
         {
             Productos producto = _context.Productos.Include(p => p.Articulos).FirstOrDefault(p => p.IdProducto == compra.IdProducto);
-            Abonados abonado = Services.UsuarioLogueado.Usuario;
+            Abonados abonado = _context.Abonados.Include(a=> a.ArticulosSegundaManoReventa).Include(b => b.Ventas)
+                .FirstOrDefault(p => p.IdAbonado == Services.UsuarioLogueado.Usuario.IdAbonado);
 
             if (producto != null && abonado != null)
             {
@@ -418,16 +428,9 @@ namespace TiendaVideojuegos.Controllers
                     return BadRequest();
                 }
 
-
                 //añadimos el artículo a los que ya tenemos
                 await _context.Articulos.AddAsync(articulo);
                 await _context.ArticulosSegundaManoReventa.AddAsync(articulosSegundaManoReventa);
-                _context.Update(producto);
-
-                //añadimos el producto que ha vendido el abonado a su lista de articulos
-                var abonadoAux = _context.Abonados.Include(b => b.Ventas).Include(b => b.ArticulosSegundaManoReventa).FirstOrDefault(p => p.IdAbonado == abonado.IdAbonado);
-                abonadoAux.ArticulosSegundaManoReventa.Add(articulosSegundaManoReventa);
-                _context.Update(abonadoAux);
 
                 await _context.SaveChangesAsync();
 

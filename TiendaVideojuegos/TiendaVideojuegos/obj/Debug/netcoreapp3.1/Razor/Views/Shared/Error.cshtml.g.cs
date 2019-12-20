@@ -13,14 +13,14 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
-#line 1 "C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\_ViewImports.cshtml"
+#line 1 "C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\_ViewImports.cshtml"
 using TiendaVideojuegos;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\_ViewImports.cshtml"
+#line 2 "C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\_ViewImports.cshtml"
 using TiendaVideojuegos.Models;
 
 #line default
@@ -34,8 +34,8 @@ using TiendaVideojuegos.Models;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
 #nullable restore
-#line 2 "C:\Users\antcu\Desktop\implementacion\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\Shared\Error.cshtml"
-  
+#line 2 "C:\Users\Lionheart\source\repos\DDSI\TiendaVideojuegos\TiendaVideojuegos\Views\Shared\Error.cshtml"
+
     ViewData["Title"] = "Error";
 
 #line default
