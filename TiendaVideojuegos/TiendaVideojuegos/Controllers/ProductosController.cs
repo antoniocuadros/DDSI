@@ -31,14 +31,14 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("Id necesario");
             }
 
             var productos = await _context.Productos.Include(b => b.Articulos)
                 .FirstOrDefaultAsync(m => m.IdProducto == id);
             if (productos == null)
             {
-                return NotFound();
+                return NotFound("Id no se corresponde con ningun producto");
             }
 
             return View(productos);
@@ -72,13 +72,13 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("Id necesario");
             }
 
             var productos = await _context.Productos.FindAsync(id);
             if (productos == null)
             {
-                return NotFound();
+                return NotFound("Id no se corresponde con ningun producto");
             }
             return View(productos);
         }
@@ -92,7 +92,7 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id != productos.IdProducto)
             {
-                return NotFound();
+                return NotFound("id necesario");
             }
 
             if (ModelState.IsValid)
@@ -106,7 +106,7 @@ namespace TiendaVideojuegos.Controllers
                 {
                     if (!ProductosExists(productos.IdProducto))
                     {
-                        return NotFound();
+                        return NotFound("Contexto productos no encontrado en la base de datos");
                     }
                     else
                     {
@@ -123,14 +123,14 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("Id necesario");
             }
 
             var productos = await _context.Productos
                 .FirstOrDefaultAsync(m => m.IdProducto == id);
             if (productos == null)
             {
-                return NotFound();
+                return NotFound("Id no se corresponde con ningun producto");
             }
 
             return View(productos);
@@ -223,13 +223,13 @@ namespace TiendaVideojuegos.Controllers
                 Services.Caja.DineroTotal -= (producto.Precio) * compra.Cantidad;
                 if (Services.Caja.DineroTotal < 0)
                 {
-                    return BadRequest();
+                    return BadRequest("No hay suficiente dinero en caja");
                 }
 
                 return RedirectToAction(nameof(Index));
             }
 
-            return BadRequest();
+            return BadRequest("No existen ese producto o ese proveedor");
             
         }
 
@@ -278,16 +278,16 @@ namespace TiendaVideojuegos.Controllers
                     }
                     else
                     {
-                        return BadRequest();
+                        return BadRequest("Articulo nuevo no disponible");
                     }
                 }
                 else
                 {
-                    return BadRequest();
+                    return BadRequest("Articulos no disponibles");
                 }
             }
 
-            return BadRequest();
+            return BadRequest("No existe el producto o el usuario no esta logueado");
 
         }
 
@@ -337,16 +337,16 @@ namespace TiendaVideojuegos.Controllers
                     }
                     else
                     {
-                        return BadRequest();
+                        return BadRequest("Articulo de segunda mano no disponible");
                     }
                 }
                 else
                 {
-                    return BadRequest();
+                    return BadRequest("Articulo no disponible");
                 }
             }
 
-            return BadRequest();
+            return BadRequest("No existe el producto o el usuario no esta logueado");
 
         }
 
@@ -425,7 +425,7 @@ namespace TiendaVideojuegos.Controllers
                 Services.Caja.DineroTotal -= (producto.Precio);
                 if (Services.Caja.DineroTotal < 0)
                 {
-                    return BadRequest();
+                    return BadRequest("No hay suficiente dinero en caja");
                 }
 
                 //añadimos el artículo a los que ya tenemos
@@ -438,7 +438,7 @@ namespace TiendaVideojuegos.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return BadRequest();
+            return BadRequest("No existe el producto o el usuario no está logueado");
 
         }
 

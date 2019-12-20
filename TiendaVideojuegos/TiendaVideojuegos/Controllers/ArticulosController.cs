@@ -32,7 +32,7 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("Es necesario un id");
             }
 
             var articulos = await _context.Articulos
@@ -40,7 +40,7 @@ namespace TiendaVideojuegos.Controllers
                 .FirstOrDefaultAsync(m => m.IdUnidad == id);
             if (articulos == null)
             {
-                return NotFound();
+                return NotFound("Id no se corresponde con ningún artículo");
             }
 
             return View(articulos);
@@ -51,7 +51,7 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("Id necesario");
             }
 
             var articulos = await _context.Articulos
@@ -59,7 +59,7 @@ namespace TiendaVideojuegos.Controllers
                 .FirstOrDefaultAsync(m => m.IdUnidad == id);
             if (articulos == null)
             {
-                return NotFound();
+                return NotFound("Id no se corresponde con ningún artículo");
             }
 
             return View(articulos);

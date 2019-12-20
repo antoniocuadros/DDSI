@@ -30,12 +30,12 @@ namespace TiendaVideojuegos.Controllers
             
             if (usuario == null)
             {
-                return NotFound();
+                return NotFound("Error: Usuario no encontrado");
             }
             
             if(usuario.Contraseña != loginViewModel.Contraseña)
             {
-                return NotFound();
+                return NotFound("Error: Contraseña Incorrecta");
             }
 
             usuario.Logueado = true;

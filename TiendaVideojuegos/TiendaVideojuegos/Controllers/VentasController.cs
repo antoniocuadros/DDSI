@@ -31,7 +31,7 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("Id necesario");
             }
 
             var ventas = await _context.Ventas
@@ -40,7 +40,7 @@ namespace TiendaVideojuegos.Controllers
                 .FirstOrDefaultAsync(m => m.IdUnidad == id);
             if (ventas == null)
             {
-                return NotFound();
+                return NotFound("No existe una venta con esos id");
             }
 
             return View(ventas);
@@ -51,13 +51,13 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("Id necesario");
             }
 
             var ventas = await _context.Ventas.FindAsync(id);
             if (ventas == null)
             {
-                return NotFound();
+                return NotFound("No existe una venta con esos id");
             }
             //ViewData["IdAbonado"] = new SelectList(_context.Abonados, "IdAbonado", "IdAbonado", ventas.IdAbonado);
             //ViewData["IdUnidad"] = new SelectList(_context.Articulos, "IdUnidad", "IdUnidad", ventas.IdUnidad);
@@ -73,7 +73,7 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id != ventas.IdUnidad)
             {
-                return NotFound();
+                return NotFound("No existe una venta con esos id");
             }
 
             if (ModelState.IsValid)
@@ -87,7 +87,7 @@ namespace TiendaVideojuegos.Controllers
                 {
                     if (!VentasExists(ventas.IdUnidad))
                     {
-                        return NotFound();
+                        return NotFound("No existe el contexto ventas en la base de datos");
                     }
                     else
                     {
@@ -106,7 +106,7 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("Id necesario");
             }
 
             var ventas = await _context.Ventas
@@ -115,7 +115,7 @@ namespace TiendaVideojuegos.Controllers
                 .FirstOrDefaultAsync(m => m.IdUnidad == id);
             if (ventas == null)
             {
-                return NotFound();
+                return NotFound("No existe una venta con esos id");
             }
 
             return View(ventas);

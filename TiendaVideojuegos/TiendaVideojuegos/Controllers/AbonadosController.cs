@@ -93,7 +93,7 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id != abonados.IdAbonado)
             {
-                return NotFound();
+                return NotFound("No existe el abonado a editar");
             }
 
             if (ModelState.IsValid)
@@ -107,7 +107,7 @@ namespace TiendaVideojuegos.Controllers
                 {
                     if (!AbonadosExists(abonados.IdAbonado))
                     {
-                        return NotFound();
+                        return NotFound("No existe el contexto abonados");
                     }
                     else
                     {
@@ -124,14 +124,14 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("Un id es necesario");
             }
 
             var abonados = await _context.Abonados
                 .FirstOrDefaultAsync(m => m.IdAbonado == id);
             if (abonados == null)
             {
-                return NotFound();
+                return NotFound("no existe un abonado con ese id");
             }
 
             return View(abonados);
@@ -216,7 +216,7 @@ namespace TiendaVideojuegos.Controllers
                     Services.Caja.DineroTotal -= (producto.Precio);
                     if (Services.Caja.DineroTotal < 0)
                     {
-                        return BadRequest();
+                        return BadRequest("No hay suficiente dinero en caja");
                     }
 
                     articuloDevolver.Vendido = false;
@@ -232,12 +232,12 @@ namespace TiendaVideojuegos.Controllers
                 }
                 else
                 {
-                    return BadRequest();
+                    return BadRequest("Articulo a devolver no existe");
                 }
                 
             }
 
-            return BadRequest();
+            return BadRequest("Es necesario que el abonado esté registrado para realizar esta operación");
 
         }
 

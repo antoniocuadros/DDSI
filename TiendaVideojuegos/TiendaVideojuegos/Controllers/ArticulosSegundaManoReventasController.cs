@@ -31,7 +31,7 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("Id necesario");
             }
 
             var articulosSegundaManoReventa = await _context.ArticulosSegundaManoReventa
@@ -40,7 +40,7 @@ namespace TiendaVideojuegos.Controllers
                 .FirstOrDefaultAsync(m => m.IdUnidad == id);
             if (articulosSegundaManoReventa == null)
             {
-                return NotFound();
+                return NotFound("Id no se corresponde con ningun articulo de segunda mano");
             }
 
             return View(articulosSegundaManoReventa);
@@ -51,7 +51,7 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("Id necesario");
             }
 
             var articulosSegundaManoReventa = await _context.ArticulosSegundaManoReventa.Include(q => q.Abonado).
@@ -59,7 +59,7 @@ namespace TiendaVideojuegos.Controllers
 
             if (articulosSegundaManoReventa == null)
             {
-                return NotFound();
+                return NotFound("Id no se corresponde con ningun articulo de segunda mano");
             }
 
             return View(articulosSegundaManoReventa);
@@ -75,7 +75,7 @@ namespace TiendaVideojuegos.Controllers
                     
             if (id != articulosSegundaManoReventa.IdUnidad)
             {
-                return NotFound();
+                return NotFound("Id no se corresponde con ningun articulo");
             }
 
             //articulosSegundaManoReventa = _context.ArticulosSegundaManoReventa.Include(a => a.Abonado).Include(b => b.Articulo)
@@ -92,7 +92,7 @@ namespace TiendaVideojuegos.Controllers
                 {
                     if (!ArticulosSegundaManoReventaExists(articulosSegundaManoReventa.IdUnidad))
                     {
-                        return NotFound();
+                        return NotFound("Contexto articulos de segunda mano no encontrado");
                     }
                     else
                     {
@@ -110,7 +110,7 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("Id necesariol");
             }
 
             var articulosSegundaManoReventa = await _context.ArticulosSegundaManoReventa
@@ -119,7 +119,7 @@ namespace TiendaVideojuegos.Controllers
                 .FirstOrDefaultAsync(m => m.IdUnidad == id);
             if (articulosSegundaManoReventa == null)
             {
-                return NotFound();
+                return NotFound("Id no se corresponde con ningun articulo de segunda mano");
             }
 
             return View(articulosSegundaManoReventa);

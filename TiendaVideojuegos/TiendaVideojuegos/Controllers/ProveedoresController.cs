@@ -30,14 +30,14 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("Id necesario");
             }
 
             var proveedores = await _context.Proveedores.Include(p => p.ArticulosNuevosAbastecimiento)
                 .FirstOrDefaultAsync(m => m.IdProveedor == id);
             if (proveedores == null)
             {
-                return NotFound();
+                return NotFound("No existe el proveedor con ese id");
             }
 
             return View(proveedores);
@@ -71,13 +71,13 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("id necesario");
             }
 
             var proveedores = await _context.Proveedores.FindAsync(id);
             if (proveedores == null)
             {
-                return NotFound();
+                return NotFound("No existe el proveedor con ese id");
             }
             return View(proveedores);
         }
@@ -91,7 +91,7 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id != proveedores.IdProveedor)
             {
-                return NotFound();
+                return NotFound("No existe el proveedor con ese id");
             }
 
             if (ModelState.IsValid)
@@ -105,7 +105,7 @@ namespace TiendaVideojuegos.Controllers
                 {
                     if (!ProveedoresExists(proveedores.IdProveedor))
                     {
-                        return NotFound();
+                        return NotFound("No existe el contexto de proveedores en la base de datos");
                     }
                     else
                     {
@@ -122,14 +122,14 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("id necesario");
             }
 
             var proveedores = await _context.Proveedores
                 .FirstOrDefaultAsync(m => m.IdProveedor == id);
             if (proveedores == null)
             {
-                return NotFound();
+                return NotFound("No existe el proveedor con ese id");
             }
 
             return View(proveedores);

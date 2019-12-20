@@ -31,7 +31,7 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("Id necesario");
             }
 
             var articulosNuevosAbastecimiento = await _context.ArticulosNuevosAbastecimientos
@@ -40,7 +40,7 @@ namespace TiendaVideojuegos.Controllers
                 .FirstOrDefaultAsync(m => m.IdUnidad == id);
             if (articulosNuevosAbastecimiento == null)
             {
-                return NotFound();
+                return NotFound("Id no se corresponde con ningun articulo nuevo");
             }
 
             return View(articulosNuevosAbastecimiento);
@@ -50,7 +50,7 @@ namespace TiendaVideojuegos.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("Id necesario");
             }
 
             var articulosNuevosAbastecimiento = await _context.ArticulosNuevosAbastecimientos
@@ -59,7 +59,7 @@ namespace TiendaVideojuegos.Controllers
                 .FirstOrDefaultAsync(m => m.IdUnidad == id);
             if (articulosNuevosAbastecimiento == null)
             {
-                return NotFound();
+                return NotFound("Id no se corresponde con ningun articulo nuevo");
             }
 
             return View(articulosNuevosAbastecimiento);
