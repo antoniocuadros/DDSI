@@ -32,16 +32,16 @@
             {
                 @if (TiendaVideojuegos.Services.UsuarioLogueado.Usuario.Nombre == "admin")
                 {
+                  <a class="button"
+                     sp-area="" asp-controller="Productos" asp-action="Comprar" asp-route-id="@Model.IdProducto">
+                     Comprar producto a proveedor
+                  </a>
                     <h4>  &nbsp;&nbsp;&nbsp;&nbsp; IdProducto: @Model.IdProducto</h4>
                     @if (Model.Articulos != null)
                     {
                         foreach (var item in Model.Articulos)
                         {
                             <h4>  &nbsp;&nbsp;&nbsp;&nbsp; Articulos: @item.IdUnidad</h4>
-                            <a class="button"
-                                asp-area="" asp-controller="Productos" asp-action="Comprar" asp-route-id="@Model.IdProducto">
-                                Comprar producto a proveedor
-                            </a>
                         }
                     }
 
