@@ -14,6 +14,8 @@ namespace TiendaVideojuegos.Models
         public Guid IdProducto { get; set; }
         [Required]
         public Productos Producto { get; set; }
+        [Required]
+        public bool Vendido { get; set; }
         public ArticulosNuevosAbastecimiento ArticuloNuevoAbastecimiento { get; set; }
         public ArticulosSegundaManoReventa ArticuloSegundaManoReventa { get; set; }
         public Ventas Venta { get; set; }

@@ -192,7 +192,8 @@ namespace TiendaVideojuegos.Controllers
                     IdUnidad = Guid.NewGuid(), 
                     ArticuloNuevoAbastecimiento = null, 
                     ArticuloSegundaManoReventa = null, 
-                    Venta = null 
+                    Venta = null,
+                    Vendido = false,
                 };
 
                 ArticulosNuevosAbastecimiento articulosNuevosAbastecimiento = new ArticulosNuevosAbastecimiento
@@ -239,7 +240,8 @@ namespace TiendaVideojuegos.Controllers
             if (producto != null && usuario_logueado != null)
             {
                 Articulos articulo = _context.Articulos.Include(p => p.ArticuloNuevoAbastecimiento).Include(q => q.ArticuloSegundaManoReventa)
-                    .Include(r => r.Producto).Include(s => s.Venta).FirstOrDefault(p => p.IdProducto == producto.IdProducto);
+                    .Include(r => r.Producto).Include(s => s.Venta).FirstOrDefault(p => p.IdProducto == producto.IdProducto && p.Vendido == false 
+                    && p.ArticuloNuevoAbastecimiento != null);
 
                 if (articulo != null)
                 {
@@ -247,52 +249,20 @@ namespace TiendaVideojuegos.Controllers
 
                     if (articuloNuevo != null)
                     {
-                        //se generan articulos auxiliares que insertaremos en la venta
-                        Articulos articuloAux = new Articulos
-                        {
-                            Producto = producto,
-                            IdProducto = producto.IdProducto,
-                            IdUnidad = articulo.IdUnidad,
-                            ArticuloNuevoAbastecimiento = null,
-                            ArticuloSegundaManoReventa = null,
-                            Venta = null
-                        };
-
-                        ArticulosNuevosAbastecimiento articuloNuevoAux = new ArticulosNuevosAbastecimiento
-                        {
-                            Articulo = articuloAux,
-                            IdAbastecimiento = articuloNuevo.IdAbastecimiento,
-                            IdProveedor = articuloNuevo.IdProveedor,
-                            IdUnidad = articuloAux.IdUnidad,
-                            Proveedor = articuloNuevo.Proveedor,
-                        };
-
-                        articuloAux.ArticuloNuevoAbastecimiento = articuloNuevoAux;
-                        articuloNuevoAux.Articulo = articuloAux;
-                        articuloAux.ArticuloNuevoAbastecimiento = articuloNuevoAux;
+                        articulo.Vendido = true;
 
                         //se genera la venta del artículo y se elimina del almacén de artículos disponibles
                         Ventas venta = new Ventas
                         {
                             Abonado = usuario_logueado,
-                            Articulo = articuloAux,
+                            Articulo = articulo,
                             IdAbonado = usuario_logueado.IdAbonado,
-                            IdUnidad = articuloAux.IdUnidad,
+                            IdUnidad = articuloNuevo.IdUnidad,
                             FechaVenta = DateTime.Now
                         };
 
-                        articuloAux.Venta = venta;
-                        venta.Articulo = articuloAux;
-
-                        //una vez generada la venta se eliminan los artículos del sistema, se almacena la venta y se suma el dinero a la caja
-                        _context.ArticulosNuevosAbastecimientos.Remove(articuloNuevo);
-                        _context.Articulos.Remove(articulo);
-                        _context.Ventas.Add(venta);
-
-                        // añadimos la venta a la lista de ventas (comprados) del Abonado
-                        var abonado = _context.Abonados.Include(b => b.Ventas).Include(b => b.ArticulosSegundaManoReventa).FirstOrDefault(p => p.IdAbonado == usuario_logueado.IdAbonado);
-                        abonado.Ventas.Add(venta);
-                        _context.Update(abonado);
+                        articulo.Venta = venta;
+                        venta.Articulo = articulo;
 
                         await _context.SaveChangesAsync();
 
@@ -324,7 +294,9 @@ namespace TiendaVideojuegos.Controllers
             Abonados usuario_logueado = Services.UsuarioLogueado.Usuario;
             if (producto != null && usuario_logueado != null)
             {
-                Articulos articulo = _context.Articulos.FirstOrDefault(p => p.IdProducto == producto.IdProducto);
+                Articulos articulo = _context.Articulos.Include(p => p.ArticuloNuevoAbastecimiento).Include(q => q.ArticuloSegundaManoReventa)
+                    .Include(r => r.Producto).Include(s => s.Venta).FirstOrDefault(p => p.IdProducto == producto.IdProducto && p.Vendido == false 
+                    && p.ArticuloSegundaManoReventa != null);
 
                 if (articulo != null)
                 {
@@ -332,52 +304,21 @@ namespace TiendaVideojuegos.Controllers
 
                     if (articuloSegundaMano != null)
                     {
-                        //se generan articulos auxiliares que insertaremos en la venta
-                        Articulos articuloAux = new Articulos
-                        {
-                            Producto = producto,
-                            IdProducto = producto.IdProducto,
-                            IdUnidad = articulo.IdUnidad,
-                            ArticuloNuevoAbastecimiento = null,
-                            ArticuloSegundaManoReventa = null,
-                            Venta = null
-                        };
 
-                        ArticulosSegundaManoReventa articuloSegundaManoAux = new ArticulosSegundaManoReventa
-                        {
-                            Articulo = articuloAux,
-                            Abonado = articuloSegundaMano.Abonado,
-                            IdUnidad = articuloAux.IdUnidad,
-                            IdAbonado = articuloSegundaMano.IdAbonado,
-                            Estado = articuloSegundaMano.Estado,
-                        };
-
-                        articuloAux.ArticuloSegundaManoReventa= articuloSegundaManoAux;
-                        articuloSegundaManoAux.Articulo = articuloAux;
-                        articuloAux.ArticuloSegundaManoReventa = articuloSegundaManoAux;
+                        articulo.Vendido = true;
 
                         //se genera la venta del artículo y se elimina del almacén de artículos disponibles
                         Ventas venta = new Ventas
                         {
                             Abonado = usuario_logueado,
-                            Articulo = articuloAux,
+                            Articulo = articulo,
                             IdAbonado = usuario_logueado.IdAbonado,
-                            IdUnidad = articuloAux.IdUnidad,
+                            IdUnidad = articulo.IdUnidad,
                             FechaVenta = DateTime.Now
                         };
 
-                        articuloAux.Venta = venta;
-                        venta.Articulo = articuloAux;
-
-                        //una vez generada la venta se eliminan los artículos del sistema, se almacena la venta y se suma el dinero a la caja
-                        _context.ArticulosSegundaManoReventa.Remove(articuloSegundaManoAux);
-                        _context.Articulos.Remove(articulo);
-                        _context.Ventas.Add(venta);
-
-                        // añadimos la venta a la lista de ventas (comprados) del Abonado
-                        var abonado = _context.Abonados.Include(b => b.Ventas).Include(b => b.ArticulosSegundaManoReventa).FirstOrDefault(p => p.IdAbonado == usuario_logueado.IdAbonado);
-                        abonado.Ventas.Add(venta);
-                        _context.Update(abonado);
+                        articulo.Venta = venta;
+                        venta.Articulo = articulo;
 
                         await _context.SaveChangesAsync();
 
@@ -454,7 +395,8 @@ namespace TiendaVideojuegos.Controllers
                     IdUnidad = Guid.NewGuid(),
                     ArticuloNuevoAbastecimiento = null,
                     ArticuloSegundaManoReventa = null,
-                    Venta = null
+                    Venta = null,
+                    Vendido = false
                 };
 
                 ArticulosSegundaManoReventa articulosSegundaManoReventa = new ArticulosSegundaManoReventa
@@ -480,7 +422,6 @@ namespace TiendaVideojuegos.Controllers
                 //añadimos el artículo a los que ya tenemos
                 await _context.Articulos.AddAsync(articulo);
                 await _context.ArticulosSegundaManoReventa.AddAsync(articulosSegundaManoReventa);
-                producto.Articulos.Add(articulo);
                 _context.Update(producto);
 
                 //añadimos el producto que ha vendido el abonado a su lista de articulos
