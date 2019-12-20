@@ -205,6 +205,12 @@ nav a:hover::before {
     background-size: cover;
 }
 
+.fondo-mario {
+    background: url('../images/mario2.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+
 .fondo-seleccion {
     background: url('../images/joycon.jpg') no-repeat center center fixed;
     background-size: cover;
@@ -222,7 +228,7 @@ th, td {
 }
 
 .button {
-    position: fixed;
+    position: absolute;
     left: 58%;
     top: 190px;
     transition: .5s ease;
@@ -242,7 +248,7 @@ th, td {
 }
 
 .button2 {
-    position: fixed;
+    position: absolute;
     left: 58%;
     top: 290px;
     transition: .5s ease;
@@ -262,7 +268,7 @@ th, td {
 }
 
 .button3 {
-    position: fixed;
+    position: absolute;
     left: 58%;
     top: 390px;
     transition: .5s ease;
@@ -282,7 +288,7 @@ th, td {
 }
 
 .button4 {
-    position: fixed;
+    position: absolute;
     left: 58%;
     top: 490px;
     transition: .5s ease;
@@ -302,7 +308,7 @@ th, td {
 }
 
 .button5 {
-    position: fixed;
+    position: absolute;
     max-width: 66px;
     min-height: 40px;
     left: 90px;
@@ -324,7 +330,7 @@ th, td {
 }
 
 .button6 {
-    position: fixed;
+    position: absolute;
     left: 165px;
     top: 250px;
     transition: .5s ease;
@@ -345,7 +351,7 @@ th, td {
 
 
 .button7 {
-    position: fixed;
+    position: absolute;
     left: 10%;
     top: 90px;
     transition: .5s ease;
@@ -363,6 +369,66 @@ th, td {
     box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
     text-align: center;
 }
+
+.button8 {
+    position: absolute;
+    left: 58%;
+    top: 590px;
+    transition: .5s ease;
+    display: inline-block;
+    padding: 0.7em 1.4em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.15em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto',sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #000;
+    background-color: #ff6a00;
+    box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+    text-align: center;
+}
+.button9 {
+    position: absolute;
+    left: 58%;
+    top: 690px;
+    transition: .5s ease;
+    display: inline-block;
+    padding: 0.7em 1.4em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.15em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto',sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #000;
+    background-color: #ff6a00;
+    box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+    text-align: center;
+}
+
+.button10 {
+    position: absolute;
+    left: 15%;
+    top: 90px;
+    transition: .5s ease;
+    display: inline-block;
+    padding: 0.7em 1.4em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.15em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto',sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #000;
+    background-color: #ff6a00;
+    box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+    text-align: center;
+}
+
 
 .button:hover {
     background-color: #d8600a

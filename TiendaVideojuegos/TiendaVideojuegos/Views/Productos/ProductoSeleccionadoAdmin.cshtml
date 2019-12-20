@@ -36,12 +36,20 @@
                      sp-area="" asp-controller="Productos" asp-action="Comprar" asp-route-id="@Model.IdProducto">
                      Comprar producto a proveedor
                   </a>
-                    <h4>  &nbsp;&nbsp;&nbsp;&nbsp; IdProducto: @Model.IdProducto</h4>
+                  <a class="button8"
+                     sp-area="" asp-controller="Productos" asp-action="Edit" asp-route-id="@Model.IdProducto">
+                     Editar
+                  </a>
+                 <a class="button9"
+                     sp-area="" asp-controller="Productos" asp-action="Delete" asp-route-id="@Model.IdProducto">
+                     Eliminar
+                  </a>
+                    <font color="white"><h4>  &nbsp;&nbsp;&nbsp;&nbsp; IdProducto: @Model.IdProducto</h4></font>
                     @if (Model.Articulos != null)
                     {
                         foreach (var item in Model.Articulos)
                         {
-                            <h4>  &nbsp;&nbsp;&nbsp;&nbsp; Articulos: @item.IdUnidad</h4>
+                           <font color="white"> <h4>  &nbsp;&nbsp;&nbsp;&nbsp; IdUnidad: @item.IdUnidad</h4></font>
                         }
                     }
 
