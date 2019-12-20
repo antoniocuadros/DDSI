@@ -4,56 +4,58 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+    <body class="fondo-compra">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdUnidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdAbonado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaVenta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Abonado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Articulo)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUnidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdAbonado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaVenta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Abonado.IdAbonado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Articulo.IdUnidad)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdUnidad">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdUnidad">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdUnidad">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <center> <font color="white"><h1>Ventas</h1></font></center>
+        <hr />
+
+        <table class="table" bgcolor="#FFFFFF">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdUnidad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdAbonado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaVenta)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Abonado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Articulo)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdUnidad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdAbonado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaVenta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Abonado.IdAbonado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Articulo.IdUnidad)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.IdUnidad">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.IdUnidad">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdUnidad">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </body>

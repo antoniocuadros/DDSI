@@ -3,13 +3,11 @@
 @{
     ViewData["Title"] = "Index";
 }
+<body class="fondo-compra">
+    <center> <font color="white"><h1>Artículos</h1></font></center>
+<hr />
 
-<center><h1>Index</h1></center>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="table" bgcolor="#FFFFFF">
     <thead>
         <tr>
             <th>
@@ -61,11 +59,10 @@
                 @Html.DisplayFor(modelItem => item.Vendido)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdUnidad">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdUnidad">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdUnidad">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.IdUnidad">Eliminar</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</body>

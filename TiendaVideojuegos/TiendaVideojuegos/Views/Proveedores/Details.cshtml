@@ -3,28 +3,30 @@
 @{
     ViewData["Title"] = "Details";
 }
+    <body class="fondo-compra">
+        <center>
+            <font color="white">
+                <h1>Detalles</h1>
+            </font>
+        </center>
+        <hr />
 
-<h1>Details</h1>
+        <div>
+            <dl class="login-box">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Nombre)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.EnlaceCatalogo)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.EnlaceCatalogo)
+                </dd>
+            </dl>
+        </div>
 
-<div>
-    <h4>Proveedores</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EnlaceCatalogo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EnlaceCatalogo)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.IdProveedor">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+        <a class="button7" asp-action="Index">Back to List</a>
+    </body>

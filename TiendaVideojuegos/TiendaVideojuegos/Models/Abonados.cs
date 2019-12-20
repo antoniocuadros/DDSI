@@ -15,7 +15,7 @@ namespace TiendaVideojuegos.Models
         public string Nombre { get; set; }
 
         [StringLength(9, MinimumLength = 9, ErrorMessage = "El formato del DNI no es valido")]
-        [RegularExpression(@"[0-9]{8}A-Z$", ErrorMessage = "El formato del DNI no es valido")]
+       // [RegularExpression(@"[0-9]{8}A-Z$", ErrorMessage = "El formato del DNI no es valido")]
         [Required]
         public string DNI { get; set; }
 

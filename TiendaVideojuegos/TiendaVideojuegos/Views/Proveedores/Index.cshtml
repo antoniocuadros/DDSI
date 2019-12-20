@@ -4,50 +4,55 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+    <body class="fondo-compra">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdProveedor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EnlaceCatalogo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ArticulosNuevosAbastecimiento)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdProveedor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EnlaceCatalogo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArticulosNuevosAbastecimiento)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdProveedor">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdProveedor">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdProveedor">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <center> <font color="white"><h1>Proveedores</h1></font></center>
+        <hr />
+
+        <p>
+            <a class="button7" asp-action="Create">Create New</a>
+        </p>
+        <table class="table" bgcolor="#FFFFFF">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdProveedor)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EnlaceCatalogo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ArticulosNuevosAbastecimiento)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdProveedor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EnlaceCatalogo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ArticulosNuevosAbastecimiento)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.IdProveedor">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.IdProveedor">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdProveedor">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </body>

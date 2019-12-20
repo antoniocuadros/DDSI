@@ -4,11 +4,15 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<body class="fondo-compra">
+<center>
+    <font color="white">
+        <h1>Editar</h1>
+    </font>
+</center>
 
-<h4>Proveedores</h4>
 <hr />
-<div class="row">
+<div class="login-box">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -31,6 +35,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="button7" asp-action="Index">Back to List</a>
 </div>
 
+</body>
