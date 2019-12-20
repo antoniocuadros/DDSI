@@ -12,6 +12,7 @@ namespace TiendaVideojuegos.Data
         public AbonadosContext(DbContextOptions<AbonadosContext> options)
             : base(options)
         {
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
