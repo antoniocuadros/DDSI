@@ -192,7 +192,8 @@ namespace TiendaVideojuegos.Controllers
                     IdUnidad = Guid.NewGuid(), 
                     ArticuloNuevoAbastecimiento = null, 
                     ArticuloSegundaManoReventa = null, 
-                    Venta = null 
+                    Venta = null,
+                    Vendido = false,
                 };
 
                 ArticulosNuevosAbastecimiento articulosNuevosAbastecimiento = new ArticulosNuevosAbastecimiento
@@ -406,7 +407,8 @@ namespace TiendaVideojuegos.Controllers
                     IdUnidad = Guid.NewGuid(),
                     ArticuloNuevoAbastecimiento = null,
                     ArticuloSegundaManoReventa = null,
-                    Venta = null
+                    Venta = null,
+                    Vendido = false
                 };
 
                 ArticulosSegundaManoReventa articulosSegundaManoReventa = new ArticulosSegundaManoReventa
@@ -432,7 +434,6 @@ namespace TiendaVideojuegos.Controllers
                 //añadimos el artículo a los que ya tenemos
                 await _context.Articulos.AddAsync(articulo);
                 await _context.ArticulosSegundaManoReventa.AddAsync(articulosSegundaManoReventa);
-                producto.Articulos.Add(articulo);
                 _context.Update(producto);
 
                 //añadimos el producto que ha vendido el abonado a su lista de articulos

@@ -167,44 +167,16 @@ namespace TiendaVideojuegos.Controllers
 
                 if (articuloDevolver != null)
                 {
-                    //se generan articulos auxiliares que insertaremos en la venta
-                    Articulos articuloAux = new Articulos
-                    {
-                        Producto = articuloDevolver.Producto,
-                        IdProducto = articuloDevolver.IdProducto,
-                        IdUnidad = articuloDevolver.IdUnidad,
-                        ArticuloNuevoAbastecimiento = null,
-                        ArticuloSegundaManoReventa = null,
-                        Venta = null
-                    };
-
-                    ArticulosSegundaManoReventa articuloSegundaManoAux = new ArticulosSegundaManoReventa
-                    {
-                        Articulo = articuloAux,
-                        Abonado = usuario_logueado,
-                        IdUnidad = articuloAux.IdUnidad,
-                        IdAbonado = usuario_logueado.IdAbonado,
-                        Estado = devolverArticuloViewModel.Estado,
-                    };
-
-                    articuloAux.ArticuloSegundaManoReventa = articuloSegundaManoAux;
-                    articuloSegundaManoAux.Articulo = articuloAux;
-                    articuloAux.ArticuloSegundaManoReventa = articuloSegundaManoAux;
 
                     //se añade el artículo a nuestro sistema
 
-                    Services.Caja.DineroTotal -= (articuloAux.Producto.Precio);
+                    Services.Caja.DineroTotal -= (articuloDevolver.Producto.Precio);
                     if (Services.Caja.DineroTotal < 0)
                     {
                         return BadRequest();
                     }
 
-                    await _context.Articulos.AddAsync(articuloAux);
-                    await _context.ArticulosSegundaManoReventa.AddAsync(articuloSegundaManoAux);
-
-                    var producto = _context.Productos.Include(p => p.Articulos).FirstOrDefault(p => p.IdProducto == articuloAux.IdProducto);
-                    producto.Articulos.Add(articuloAux);
-                    _context.Update(producto);
+                    articuloDevolver.Vendido = false;
 
                     // quitamos la venta de la lista de ventas (comprados) del Abonado
                     var abonado = _context.Abonados.Include(a => a.ArticulosSegundaManoReventa).Include(b => b.Ventas).FirstOrDefault(p => p.IdAbonado == usuario_logueado.IdAbonado);
