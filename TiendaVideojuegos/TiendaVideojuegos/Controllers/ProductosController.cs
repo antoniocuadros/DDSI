@@ -238,7 +238,7 @@ namespace TiendaVideojuegos.Controllers
             Abonados usuario_logueado = Services.UsuarioLogueado.Usuario;
             if (producto != null && usuario_logueado != null)
             {
-                Articulos articulo = _context.Articulos.FirstOrDefault(p => p.IdProducto == producto.IdProducto);
+                Articulos articulo = _context.Articulos.Include(p => p.ArticuloNuevoAbastecimiento).FirstOrDefault(p => p.IdProducto == producto.IdProducto);
 
                 if (articulo != null)
                 {

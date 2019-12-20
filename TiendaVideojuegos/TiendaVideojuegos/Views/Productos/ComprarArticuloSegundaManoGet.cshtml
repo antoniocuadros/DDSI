@@ -3,13 +3,25 @@
 <body class="fondo-compra">
     <center class="login-box2">
         <h1>¿Seguro que quiere comprar el juego de segunda mano @Model.Nombre?</h1>
-        <a class="button5" style="margin-right:700px;">
-            Si
-        </a>
 
-        <a class="button6" style="margin-right:700px;">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="ComprarArticuloSegundaMano">
+                    <div class="form-group">
+                        <input type="hidden" asp-for="IdProducto" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="button5" style="margin-right:700px;" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <a class="button6" style="margin-right:700px;"
+           asp-area="" asp-controller="Productos" asp-action="Index">
             No
         </a>
+
     </center>
 </body>
 
