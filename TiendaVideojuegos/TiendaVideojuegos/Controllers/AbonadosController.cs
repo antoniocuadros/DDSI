@@ -153,7 +153,50 @@ namespace TiendaVideojuegos.Controllers
             return _context.Abonados.Any(e => e.IdAbonado == id);
         }
 
-        // POST: Productos/ComprarArticuloAbonado
+        // GET: Abonados/Devolver
+        [HttpGet("Abonados/Devolver")]
+        public async Task<IActionResult> Devolver()
+        {
+            var listaaux = await _context.Ventas.Include(b => b.Abonado).Include(b => b.Articulo).ToListAsync();
+
+            var lista = new List<Ventas>();
+
+            //Guid idProducto = new Guid();
+
+            foreach(var item in listaaux)
+            {
+                if (item.IdAbonado == Services.UsuarioLogueado.Usuario.IdAbonado)
+                {
+                    lista.Add(item);
+                    //idProducto = item.Articulo.IdProducto;
+                }
+            }
+
+            //var devolverViewModel = new DevolverViewModel()
+            //{
+            //    nombreProducto = _context.Productos.FirstOrDefault(a => a.IdProducto == idProducto).Nombre,
+            //    PrecioProducto = _context.Productos.FirstOrDefault(a => a.IdProducto == idProducto).Precio,
+            //    ventas = lista,
+            //};
+
+            return View(lista);
+        }
+
+        // GET: Abonados/DevolverConcreto
+        [HttpGet("Abonados/DevolverConcreto/{id?}")]
+        public async Task<IActionResult> DevolverConcreto([FromRoute] Guid id)
+        {
+            var devolverArticuloViewModel = new DevolverArticuloViewModel()
+            {
+                Estado = "",
+                IdUnidad = id,
+            };
+
+            return View(devolverArticuloViewModel);
+        }
+
+
+        // POST: Abonados/Devolver
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DevolverArticulo([Bind("IdUnidad, Estado")] DevolverArticuloViewModel devolverArticuloViewModel)
@@ -162,15 +205,16 @@ namespace TiendaVideojuegos.Controllers
        
             if (usuario_logueado != null)
             {
-                Ventas venta = usuario_logueado.Ventas.FirstOrDefault(p => p.IdUnidad == devolverArticuloViewModel.IdUnidad);
+                Ventas venta = _context.Ventas.Include(a => a.Articulo).Include(b => b.Abonado).FirstOrDefault(p => p.IdUnidad == devolverArticuloViewModel.IdUnidad);
                 Articulos articuloDevolver = venta.Articulo;
+                Productos producto = _context.Productos.FirstOrDefault(a => a.IdProducto == articuloDevolver.IdProducto);
 
                 if (articuloDevolver != null)
                 {
 
                     //se añade el artículo a nuestro sistema
 
-                    Services.Caja.DineroTotal -= (articuloDevolver.Producto.Precio);
+                    Services.Caja.DineroTotal -= (producto.Precio);
                     if (Services.Caja.DineroTotal < 0)
                     {
                         return BadRequest();

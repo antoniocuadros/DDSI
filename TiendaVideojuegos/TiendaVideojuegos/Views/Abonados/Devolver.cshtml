@@ -1,0 +1,23 @@
+﻿@model List<TiendaVideojuegos.Models.Ventas>
+
+<h1>Devolver</h1>
+
+@foreach(var item in @Model)
+{
+<dl class="row">
+    <dt class="col-sm-2">
+        Fecha venta: @item.FechaVenta
+        <a class="button"
+           sp-area="" asp-controller="Abonados" asp-action="DevolverConcreto" asp-route-id="@item.Articulo.IdUnidad">
+            Devolver articulo
+        </a>
+    </dt>
+    @*<dd class="col-sm-10">
+        Nombre del producto: @item.Articulo.
+    </dd>
+    <dt class="col-sm-2">
+        Nombre del producto: @item.Articulo.Producto.Precio
+    </dt>*@
+   
+</dl>
+}
