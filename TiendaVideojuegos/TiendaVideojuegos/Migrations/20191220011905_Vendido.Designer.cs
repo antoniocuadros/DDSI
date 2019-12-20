@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TiendaVideojuegos.Data;
 
 namespace TiendaVideojuegos.Migrations
 {
     [DbContext(typeof(AbonadosContext))]
-    partial class AbonadosContextModelSnapshot : ModelSnapshot
+    [Migration("20191220011905_Vendido")]
+    partial class Vendido
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
