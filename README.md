@@ -2,9 +2,13 @@
 
 ## Integrantes del grupo
 Francisco Javier Casado de Amezúa García
+
 Antonio Cuadros Lapresta
+
 Jose Alberto García Collado
+
 Juan Emilio Martínez Manjón
+
 Alberto Sócrates Ortega Calvo
 
 ## Requisitos
